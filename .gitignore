@@ -7,6 +7,7 @@ site-packages
 request
 url
 
+lisp/conf-custom.el
 .last-package-update-day
 .directory
 .projectile

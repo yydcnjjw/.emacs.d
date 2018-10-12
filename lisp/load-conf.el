@@ -1,3 +1,4 @@
+(require 'conf-custom nil t)
 (require 'load-lib)
 (require 'init-package)
 (require 'load-common)

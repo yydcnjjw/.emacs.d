@@ -4,25 +4,6 @@
 (let ((default-directory (file-name-as-directory emacs-user-conf-dir)))
   (normal-top-level-add-subdirs-to-load-path))
 
-(setq support-languages '("c-c++"
-                          "python"
-                          "org"
-                          "elisp"
-                          "shell"
-                          "glsl"
-                          "dot"
-                          "md"))
-
-(setq support-projects '("cmake-project"
-                         "python-project"
-                         "js-project"
-                         "gradle-project"
-                         "idea"
-                         "qt-project"
-                         "linux-kernel"))
-
-(setq ccls-executable "~/.emacs.d/site-packages/ccls/build/ccls")
-
 (require 'load-conf)
 (setenv "MAGICK_OCL_DEVICE" "OFF")
 
