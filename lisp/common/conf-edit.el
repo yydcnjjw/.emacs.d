@@ -43,26 +43,6 @@
                               )))
 (add-hook 'prog-mode-hook 'my/conf-electric-pair-mode)
 
-;; flyspell
-(setq ispell-local-dictionary-alist
-      '(("en_US-large"                      
-         "[A-Za-z]"
-         "[^A-Za-z]"
-         "[']"
-         nil
-         ("-d" "en_US-large")
-         nil utf-8)))
-(setq ispell-dictionary "en_US-large")
-(when (executable-find "hunspell")
-  (setq ispell-program-name "hunspell")
-  (setq ispell-really-hunspell t))
-(add-hook 'prog-mode-hook #'flyspell-prog-mode)
-(add-hook 'text-mode-hook #'flyspell-mode)
-(with-eval-after-load 'flyspell
-  (require-package 'flyspell-correct-ivy)
-  (require 'flyspell-correct-ivy)
-  (define-key flyspell-mode-map (kbd "C-;") 'flyspell-correct-wrapper))
-
 ;; auto save
 (setq auto-save-visited-interval 1)
 (my/add-hook-prog-and-text-mode (lambda () (auto-save-visited-mode 1)))
