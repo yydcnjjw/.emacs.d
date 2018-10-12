@@ -8,6 +8,7 @@
           python-shell-interpreter-args "--simple-prompt -i")))
 (my/set-python-shell-interpreter)
 
+(setq enable-python-env t)
 (if (executable-find "virtualenv")
     (progn 
       (require-package 'virtualenvwrapper)
@@ -31,13 +32,15 @@
                 (lambda ()
                   (setenv "PYTHONPATH" "")
                   (setenv "LD_LIBRARY_PATH" ""))))
-  (message "option: require virtualenv"))
+  (progn
+    (message "option: require virtualenv")
+    (setq enable-python-env nil)))
 
 (when (executable-find "pyls")
   (require-package 'lsp-python)
   (defun my/python-company ()
     (require 'lsp-python)
-    (when has-env
+    (when enable-python-env
       (venv-workon my/venv))
     (my/configure-lsp-company)
     (setq company-lsp-cache-candidates t)
