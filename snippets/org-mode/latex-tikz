@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: latex tikz
+# key: ltikz
+# --
+
+#+name: $1
+#+header: :file (by-backend (latex "$2.tikz") (t "$3.png"))
+#+begin_src latex :results raw graphics
+  \begin{tikzpicture}
+    $0
+  \end{tikzpicture}
+#+end_src

@@ -1,0 +1,5 @@
+build
+.ccls-cache
+
+.directory
+compile_commands.json

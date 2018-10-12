@@ -1,0 +1,11 @@
+{
+  "name": "__PROJECT-NAME__",
+  "version": "__VERSION__",
+  "description": "__DESCRIPTION__",
+  "main": "index.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "author": "__USER-NAME__",
+  "license": "ISC"
+}

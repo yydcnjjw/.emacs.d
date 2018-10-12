@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: paper-summary
+# key: paper-summary
+# --
+- Summary:$0
+- Problem:
+- Experiment
+  - Date:
+  - Model:
+
+*** Method:

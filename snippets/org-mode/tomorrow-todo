@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: tomorrow-todo
+# key: tomorrow-todo
+# --
+** TODO `(format-time-string "[%Y-%m-%d %a]" (time-add (current-time) (* 60 60 24)))` :day:
+*** TODO $1
+`(format-time-string "<%Y-%m-%d %a 08:00>--<%Y-%m-%d %a 10:00>" (time-add (current-time) (* 60 60 24)))`
+*** TODO $2
+`(format-time-string "<%Y-%m-%d %a 10:00>--<%Y-%m-%d %a 12:00>" (time-add (current-time) (* 60 60 24)))`
+*** TODO ${3:rest & drawing :rest:drawing:}
+`(format-time-string "<%Y-%m-%d %a 12:00>--<%Y-%m-%d %a 14:00>" (time-add (current-time) (* 60 60 24)))`
+*** TODO $4
+`(format-time-string "<%Y-%m-%d %a 14:00>--<%Y-%m-%d %a 16:00>" (time-add (current-time) (* 60 60 24)))`
+*** TODO $5
+`(format-time-string "<%Y-%m-%d %a 16:00>--<%Y-%m-%d %a 18:00>" (time-add (current-time) (* 60 60 24)))`
+*** TODO ${6:rest :rest:}
+`(format-time-string "<%Y-%m-%d %a 18:00>--<%Y-%m-%d %a 19:00>" (time-add (current-time) (* 60 60 24)))`
+*** TODO $7
+`(format-time-string "<%Y-%m-%d %a 19:00>--<%Y-%m-%d %a 20:00>" (time-add (current-time) (* 60 60 24)))`
+*** TODO $8
+`(format-time-string "<%Y-%m-%d %a 20:00>--<%Y-%m-%d %a 21:00>" (time-add (current-time) (* 60 60 24)))`
+*** TODO ${9:drawing :drawing:}
+`(format-time-string "<%Y-%m-%d %a 21:00>--<%Y-%m-%d %a 22:30>" (time-add (current-time) (* 60 60 24)))`
+*** TODO ${10:tomorrow todo}
+`(format-time-string "<%Y-%m-%d %a 22:30>--<%Y-%m-%d %a 23:00>" (time-add (current-time) (* 60 60 24)))`
+$0
+ 

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: latex-src
+# key: latex
+# --
+<<Eqn.($1)>>
+#+BEGIN_SRC latex :results raw :exports none
+$0
+#+END_SRC 
