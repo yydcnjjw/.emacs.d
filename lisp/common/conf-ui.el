@@ -1,4 +1,5 @@
 (defconst my/en-font "hack 12")
+(set-frame-font my/en-font)
 
 (setq-default cursor-type 'bar)
 (tool-bar-mode -1)
