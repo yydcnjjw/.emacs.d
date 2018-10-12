@@ -1,6 +1,7 @@
 (require 'conf-ui)
 (require 'conf-edit)
 (require 'conf-company)
+(require 'conf-ispell)
 (require 'conf-ivy)
 (require 'conf-snippet)
 (require 'conf-view-mode)

@@ -1,7 +1,6 @@
 ;; (setq org-image-actual-width (/ (display-pixel-width) 3))
 (setq org-startup-indented t)
 
-(set-frame-font my/en-font)
 (dolist (charset '(kana han symbol cjk-misc bopomofo))
   (set-fontset-font (frame-parameter nil 'font)
                     charset
