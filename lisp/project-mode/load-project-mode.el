@@ -5,8 +5,7 @@
   :type 'list)
 
 (when support-projects
-  (dolist (list support-languages)
-    (require list)
-    ))
+  (dolist (list support-projects)
+    (require (intern (concat "conf-" list)))))
 
 (provide 'load-project-mode)

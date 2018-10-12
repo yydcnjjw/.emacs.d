@@ -4,7 +4,7 @@
 
 (when support-languages
   (dolist (list support-languages)
-    (require list)
+    (require (intern (concat "conf-" list)))
   ))
 
 ;; (require 'conf-html)

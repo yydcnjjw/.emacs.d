@@ -1,5 +1,6 @@
 (require-package 'projectile)
-(require-package 'ag)
+(when (executable-find "ag")
+  (require-package 'ag))
 (require-package 'skeletor)
 (setq projectile-completion-system 'ivy)
 (setq projectile-enable-caching t)
