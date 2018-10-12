@@ -4,21 +4,32 @@
 (let ((default-directory (file-name-as-directory emacs-user-conf-dir)))
   (normal-top-level-add-subdirs-to-load-path))
 
+(setq support-languages '(conf-c-c++
+                          conf-python
+                          conf-org
+                          conf-elisp
+                          conf-shell
+                          conf-glsl
+                          conf-dot
+                          conf-md))
+
+(setq support-project-type '(conf-cmake-project
+                             conf-python-project
+                             conf-js-project
+                             conf-gradle-project
+                             conf-idea
+                             conf-qt-project
+                             conf-linux-kernel))
+
+(setq ccls-executable "~/.emacs.d/site-packages/ccls/build/ccls")
+
 (require 'load-conf)
 (setenv "MAGICK_OCL_DEVICE" "OFF")
-
 
 ;;  '(package-selected-packages
 ;;    (quote
 ;;     (use-package magit-todos ccls org-plus-contrib markdown-preview-mode ein flyspell-correct-ivy google-translate atomic-chrome posframe pyim lsp-vue vue-mode lsp-clangd kotlin-mode lsp-intellij lsp-html js2-mode json-mode chinese-word-at-point ag comment-tags org-ref virtualenvwrapper magit org2ctex graphviz-dot-mode web-mode company-restclient restclient clang-format htmlize cdlatex auctex avy-flycheck yasnippet-snippets xcscope spacemacs-theme skeletor projectile org-download lsp-ui lsp-python ivy-xref hungry-delete ggtags counsel company-shell company-quickhelp company-math company-lsp company-glsl cmake-mode)))
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (yasnippet-snippets xcscope virtualenvwrapper spacemacs-theme skeletor pyim posframe org2ctex org-ref org-plus-contrib org-download markdown-preview-mode magit lsp-ui ivy-xref hungry-delete graphviz-dot-mode google-translate flyspell-correct-ivy ein dockerfile-mode docker counsel company-shell company-quickhelp company-math company-lsp company-glsl comment-tags cmake-mode chinese-word-at-point cdlatex ccls avy auto-package-update auctex atomic-chrome ag)))
  '(safe-local-variable-values
    (quote
     ((eval my/view-mode-fun)
@@ -42,9 +53,3 @@
                  (format "cmake --build %s" build-dir))
            (setq projectile-project-run-cmd
                  (format "%s" build-dir)))))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-table ((t (:family "Noto Sans Mono CJK SC")))))

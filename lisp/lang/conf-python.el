@@ -7,7 +7,7 @@
     (setq python-shell-interpreter "ipython"
           python-shell-interpreter-args "--simple-prompt -i")))
 (my/set-python-shell-interpreter)
-(setq has-env t)
+
 (if (executable-find "virtualenv")
     (progn 
       (require-package 'virtualenvwrapper)
@@ -30,9 +30,8 @@
       (add-hook 'venv-postdeactivate-hook
                 (lambda ()
                   (setenv "PYTHONPATH" "")
-                  (setenv "LD_LIBRARY_PATH" "")))
-      )
-  (setq has-env nil))
+                  (setenv "LD_LIBRARY_PATH" ""))))
+  (message "option: require virtualenv"))
 
 (when (executable-find "pyls")
   (require-package 'lsp-python)
@@ -51,7 +50,7 @@
   (add-hook 'python-mode-local-vars-hook #'my/python-company))
 
 ;;jupyter support
-(require-package 'ein)
-(setq ein:completion-backend 'ein:use-company-backend)
-
+(when (executable-find "jupyter")
+  (require-package 'ein)
+  (setq ein:completion-backend 'ein:use-company-backend))
 (provide 'conf-python)

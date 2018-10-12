@@ -1,10 +1,12 @@
 (require 'conf-projectile)
-(require 'conf-cmake-project)
-(require 'conf-python-project)
-(require 'conf-js-project)
-(require 'conf-gradle-project)
-(require 'conf-idea)
-(require 'conf-qt-project)
-(require 'conf-linux-kernel)
+
+(defcustom support-projects nil
+  ""
+  :type 'list)
+
+(when support-projects
+  (dolist (list support-languages)
+    (require list)
+    ))
 
 (provide 'load-project-mode)

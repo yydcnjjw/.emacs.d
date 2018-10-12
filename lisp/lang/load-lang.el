@@ -1,18 +1,15 @@
-(setq ccls-executable "~/.emacs.d/site-packages/ccls/build/ccls")
-(when (executable-find ccls-executable)
-  (require 'conf-c-c++))
+(defcustom support-languages nil
+  ""
+  :type 'list)
 
-(require 'conf-python)
+(when support-languages
+  (dolist (list support-languages)
+    (require list)
+  ))
 
-(require 'conf-elisp)
-(require 'conf-org)
-(require 'conf-glsl)
 ;; (require 'conf-html)
-(require 'conf-dot)
 ;; (require 'conf-js)
 ;; (require 'conf-java)
-(require 'conf-shell)
 ;; (require 'conf-kotlin)
-(require 'conf-md)
 
 (provide 'load-lang)
