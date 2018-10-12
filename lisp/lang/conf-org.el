@@ -1,6 +1,15 @@
 ;; (setq org-image-actual-width (/ (display-pixel-width) 3))
 (setq org-startup-indented t)
 
+(set-frame-font my/en-font)
+(dolist (charset '(kana han symbol cjk-misc bopomofo))
+  (set-fontset-font (frame-parameter nil 'font)
+                    charset
+                    (font-spec :family "Noto Sans CJK SC")))
+
+(custom-set-faces
+ '(org-table ((t (:family "Noto Sans Mono CJK SC")))))
+
 ;; config `org-download'
 (require-package 'org-download)
 (with-eval-after-load 'org-download

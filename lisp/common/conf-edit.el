@@ -60,6 +60,7 @@
 (add-hook 'text-mode-hook #'flyspell-mode)
 (with-eval-after-load 'flyspell
   (require-package 'flyspell-correct-ivy)
+  (require 'flyspell-correct-ivy)
   (define-key flyspell-mode-map (kbd "C-;") 'flyspell-correct-wrapper))
 
 ;; auto save
