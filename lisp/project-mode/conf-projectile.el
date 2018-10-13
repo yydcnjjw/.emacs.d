@@ -8,6 +8,10 @@
 
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
+(defvar-local build-type "Debug")
+(defvar-local build-option "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON")
+(defvar-local build-dir "debug")
+
 (defun my/projectile-dynamic-change-index-method()
   (when (projectile-project-p)
     (if (eq (projectile-project-vcs) 'none)
@@ -16,7 +20,7 @@
 
 (defun my/projectile-custom-switch-action()
   (my/projectile-dynamic-change-index-method)
-  (projectile-dired))
+  (projectile-find-file))
 (setq projectile-switch-project-action #'my/projectile-custom-switch-action)
 
 (add-hook 'find-file-hook #'my/projectile-dynamic-change-index-method)
