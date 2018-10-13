@@ -2,7 +2,15 @@
     (progn
       (require-package 'ccls)
       (require-package 'xcscope)
-
+      ;; FIXME: fix Wait for lsp-ui repair to complete temporarily use flycheck below
+      (require-package 'flycheck-clang-tidy)
+      (eval-after-load 'flycheck
+        '(add-hook 'flycheck-mode-hook #'flycheck-clang-tidy-setup))
+      (defun my/c-c++-flycheck()
+        ;; (setq flycheck-check-syntax-automatically '(save
+        ;;                                             mode-enabled))
+        (setq flycheck-clang-tidy-build-path "."))
+      
       ;; c/c++/Object-c
       (setq my/c-c++-project-index-file ".ccls")
       (with-eval-after-load 'projectile
@@ -10,6 +18,23 @@
               (append '("compile_commands.json"
                         ".ccls")
                       projectile-project-root-files-top-down-recurring)))
+      (defun my/lsp-ui-peek-enable()
+        (when enable-lsp-ui          
+          (defun my/c-c++-callee ()
+            (interactive)
+            (lsp-ui-peek-find-custom 'callee "$ccls/call" '(:callee t)))
+          (defun my/c-c++-caller ()
+            (interactive)
+            (lsp-ui-peek-find-custom 'caller "$ccls/call"))
+          (defun my/c-c++-vars (kind)
+            (lsp-ui-peek-find-custom 'vars "$ccls/vars" `(:kind ,kind)))
+          (defun my/c-c++-base (levels)
+            (lsp-ui-peek-find-custom 'base "$ccls/inheritance" `(:levels ,levels)))
+          (defun my/c-c++derived (levels)
+            (lsp-ui-peek-find-custom 'derived "$ccls/inheritance" `(:levels ,levels :derived t)))
+          (defun my/c-c++member (kind)
+            (interactive)
+            (lsp-ui-peek-find-custom 'member "$ccls/member" `(:kind ,kind)))))
 
       (defun my/lsp-ccls-enable ()
         (setq ccls-extra-args '("--log-file=/tmp/ccls.log"))
@@ -22,24 +47,10 @@
         (setq company-transformers nil
               company-lsp-async t
               company-lsp-cache-candidates nil)
-        (lsp-ccls-enable)
-        (lsp-enable-imenu))
-
-      (defun ccls/callee ()
-        (interactive)
-        (lsp-ui-peek-find-custom 'callee "$ccls/call" '(:callee t)))
-      (defun ccls/caller ()
-        (interactive)
-        (lsp-ui-peek-find-custom 'caller "$ccls/call"))
-      (defun ccls/vars (kind)
-        (lsp-ui-peek-find-custom 'vars "$ccls/vars" `(:kind ,kind)))
-      (defun ccls/base (levels)
-        (lsp-ui-peek-find-custom 'base "$ccls/inheritance" `(:levels ,levels)))
-      (defun ccls/derived (levels)
-        (lsp-ui-peek-find-custom 'derived "$ccls/inheritance" `(:levels ,levels :derived t)))
-      (defun ccls/member (kind)
-        (interactive)
-        (lsp-ui-peek-find-custom 'member "$ccls/member" `(:kind ,kind)))
+        (my/c-c++-flycheck)
+        (setq enable-lsp-ui nil)
+        (my/lsp-ui-peek-enable)
+        (lsp-ccls-enable))
 
       (defun my/c-c++-mode-code-format ()
         (setq c-default-style '((c-mode . "linux")

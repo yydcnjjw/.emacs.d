@@ -18,17 +18,25 @@
   (make-local-variable 'company-backends)
   (push backend company-backends))
 
-(require-package 'lsp-mode)
 (require-package 'lsp-ui)
+(defcustom enable-lsp-ui t
+  ""
+  :type 'boolean)
+
+(defun my/enable-lsp-ui()
+  (when enable-lsp-ui
+    (setq lsp-ui-flycheck-enable nil)
+    (setq lsp-ui-flycheck-live-reporting nil)
+    (setq flycheck-check-syntax-automatically '(save mode-enable))
+    (lsp-ui-mode 1)
+    (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)))
+
+(require-package 'lsp-mode)
 (require-package 'flycheck)
 (add-hook 'lsp-mode-hook
           (lambda ()
-            ;; (setq lsp-ui-flycheck-enable nil)
-            ;; (setq lsp-ui-flycheck-live-reporting nil)
-            ;; (setq flycheck-check-syntax-automatically '(save mode-enable))
-            (lsp-ui-mode 1)
-            (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-            (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+            (my/enable-lsp-ui)
             (flycheck-mode 1)))
 
 (require-package 'company-lsp)
