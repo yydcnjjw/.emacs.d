@@ -18,7 +18,7 @@
       (add-hook 'venv-postactivate-hook #'my/set-python-shell-interpreter)
       (setq-default mode-line-format (cons '(:exec venv-current-name) mode-line-format))
       
-      (defvar-local my/venv "math")
+      (defvar-local my/venv nil)
       (defvar-local my/python-path '(""))
       (defvar-local my/ld-library-path '(""))
       (add-hook 'venv-postactivate-hook
@@ -40,10 +40,12 @@
   (require-package 'lsp-python)
   (defun my/python-company ()
     (require 'lsp-python)
-    (when enable-python-env
+    (when (and enable-python-env my/venv)
       (venv-workon my/venv))
     (my/configure-lsp-company)
-    (setq company-lsp-cache-candidates t)
+    (setq company-transformers nil
+          company-lsp-async t
+          company-lsp-cache-candidates t)
     (let ((root-dir (my/projectile-project-root))
           (setup-py-file ""))
       (set 'setup-py-file (expand-file-name "tox.ini" root-dir))
