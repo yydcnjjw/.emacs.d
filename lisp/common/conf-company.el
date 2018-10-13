@@ -25,9 +25,6 @@
 
 (defun my/enable-lsp-ui()
   (when enable-lsp-ui
-    (setq lsp-ui-flycheck-enable nil)
-    (setq lsp-ui-flycheck-live-reporting nil)
-    (setq flycheck-check-syntax-automatically '(save mode-enable))
     (lsp-ui-mode 1)
     (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
     (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)))

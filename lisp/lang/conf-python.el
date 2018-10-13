@@ -57,5 +57,10 @@
 ;;jupyter support
 (when (executable-find "jupyter")
   (require-package 'ein)
-  (setq ein:completion-backend 'ein:use-company-backend))
+  (setq ein:completion-backend 'ein:use-company-backend)
+  (add-hook 'ein:connect-mode-hook
+            (lambda ()
+              ;; Fix ein overriding find-define key in python-mode
+              (when (eq major-mode 'python-mode) 
+                (my/enable-lsp-ui)))))
 (provide 'conf-python)
