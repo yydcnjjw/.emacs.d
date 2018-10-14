@@ -12,7 +12,7 @@
                            ;; company-capf
 	                   company-abbrev
 	                   company-dabbrev)))
-(global-company-mode)
+(my/add-hook-prog-and-text-mode 'company-mode)
 
 (defun my/local-push-company-backend (backend)
   (make-local-variable 'company-backends)

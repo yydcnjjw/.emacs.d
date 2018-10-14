@@ -5,12 +5,16 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
+
 (setq frame-resize-pixelwise t)
 (setq inhibit-splash-screen 1)
-(global-hl-line-mode t)
+
 (require-package 'spacemacs-theme)
-(load-theme 'spacemacs-dark t)
-(global-linum-mode t)
+(add-hook 'after-init-hook
+          (lambda ()
+            (load-theme 'spacemacs-dark t)
+            (global-hl-line-mode)
+            (global-linum-mode)))
 
 (setq ring-bell-function 'ignore)
 

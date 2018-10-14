@@ -21,6 +21,6 @@
   ;; (setq auto-package-update-hide-results t)
   ;; (setq auto-package-update-prompt-before-update t)
   )
-(auto-package-update-maybe)
+(add-hook 'after-init-hook #'auto-package-update-maybe)
 
 (provide 'init-package)

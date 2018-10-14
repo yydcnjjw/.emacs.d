@@ -21,5 +21,6 @@
   (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
   (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
   (setq xref-show-xrefs-function 'ivy-xref-show-xrefs))
-(ivy-mode 1)
+(add-hook 'after-init-hook 'ivy-mode)
+
 (provide 'conf-ivy)

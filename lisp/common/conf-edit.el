@@ -4,7 +4,10 @@
 (setq-default indent-tabs-mode nil)
 
 (require-package 'hungry-delete)
-(global-hungry-delete-mode)
+(dolist (hook '(emacs-lisp-mode-hook
+                c-mode-hook
+                c++-mode-hook))
+  (add-hook hook #'hungry-delete-mode))
 
 ;; Modify the default function `set-mark-command' key
 (global-unset-key (kbd "C-SPC"))
@@ -30,11 +33,10 @@
 (add-hook 'prog-mode-hook 'comment-tags-mode)
 
 ;; electric
-(electric-layout-mode 1)
 (setq show-paren-delay 0)
-(show-paren-mode 1)
+(add-hook 'after-init-hook 'show-paren-mode)
 (defun my/conf-electric-pair-mode()
-  (electric-pair-mode 1)
+  (electric-pair-mode)
   (setq electric-pair-pairs '(
                               (?\" . ?\")
                               (?\' . ?\')
@@ -45,7 +47,7 @@
 
 ;; auto save
 (setq auto-save-visited-interval 1)
-(my/add-hook-prog-and-text-mode (lambda () (auto-save-visited-mode 1)))
+(my/add-hook-prog-and-text-mode 'auto-save-visited-mode)
 
 (require-package 'avy)
 (global-set-key (kbd "C-:") 'avy-goto-char)
@@ -71,6 +73,6 @@
   (setq atomic-chrome-url-major-mode-alist
         '(("github\\.com" . gfm-mode)
           ("redmine" . textile-mode))))
-(atomic-chrome-start-server)
+(add-hook 'after-init-hook 'atomic-chrome-start-server)
 
 (provide 'conf-edit)
