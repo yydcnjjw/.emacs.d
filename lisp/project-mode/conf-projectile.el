@@ -5,12 +5,7 @@
 (setq projectile-completion-system 'ivy)
 (setq projectile-enable-caching t)
 (projectile-global-mode)
-
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-
-(defvar-local build-type "Debug")
-(defvar-local build-option "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON")
-(defvar-local build-dir "debug")
 
 (defun my/projectile-dynamic-change-index-method()
   (when (projectile-project-p)

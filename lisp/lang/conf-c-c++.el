@@ -2,11 +2,12 @@
     (progn
       (require-package 'ccls)
       (require-package 'xcscope)
-      ;; FIXME: fix Wait for lsp-ui repair to complete temporarily use flycheck below
-      (require-package 'flycheck-clang-tidy)
-      (eval-after-load 'flycheck
-        '(add-hook 'flycheck-mode-hook #'flycheck-clang-tidy-setup))
       (defun my/c-c++-flycheck()
+        ;; FIXME: fix Wait for lsp-ui repair to complete temporarily use flycheck below
+        (require-package 'flycheck-clang-tidy)
+        (eval-after-load 'flycheck
+          '(add-hook 'flycheck-mode-hook #'flycheck-clang-tidy-setup))
+
         ;; (setq flycheck-check-syntax-automatically '(save
         ;;                                             mode-enabled))
         (setq flycheck-clang-tidy-build-path "."))
@@ -47,8 +48,8 @@
         (setq company-transformers nil
               company-lsp-async t
               company-lsp-cache-candidates nil)
-        (my/c-c++-flycheck)
-        (setq enable-lsp-ui nil)
+        ;; (my/c-c++-flycheck)
+        ;; (setq enable-lsp-ui nil)
         (my/lsp-ui-peek-enable)
         (lsp-ccls-enable))
 
