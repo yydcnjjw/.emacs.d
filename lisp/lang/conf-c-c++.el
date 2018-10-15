@@ -2,15 +2,6 @@
     (progn
       (require-package 'ccls)
       (require-package 'xcscope)
-      (defun my/c-c++-flycheck()
-        ;; FIXME: fix Wait for lsp-ui repair to complete temporarily use flycheck below
-        (require-package 'flycheck-clang-tidy)
-        (eval-after-load 'flycheck
-          '(add-hook 'flycheck-mode-hook #'flycheck-clang-tidy-setup))
-
-        ;; (setq flycheck-check-syntax-automatically '(save
-        ;;                                             mode-enabled))
-        (setq flycheck-clang-tidy-build-path "."))
       
       ;; c/c++/Object-c
       (setq my/c-c++-project-index-file ".ccls")
@@ -48,8 +39,6 @@
         (setq company-transformers nil
               company-lsp-async t
               company-lsp-cache-candidates nil)
-        ;; (my/c-c++-flycheck)
-        ;; (setq enable-lsp-ui nil)
         (my/lsp-ui-peek-enable)
         (lsp-ccls-enable))
 
@@ -78,7 +67,7 @@
                           (when (equal project-type nil)
                             (let ((index-file (expand-file-name my/c-c++-project-index-file default-directory)))
                               (unless (file-exists-p index-file)
-                                (shell-command (format "cp ~/.emacs.d/lisp/lib/template/cquery-once-file-template %s" index-file)))))
+                                (shell-command (format "cp ~/.emacs.d/lisp/lib/template/ccls-once-file-template %s" index-file)))))
                           (my/configure-lsp-company)
                           (my/lsp-ccls-enable)
                           )))))))))
