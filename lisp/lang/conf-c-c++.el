@@ -2,7 +2,7 @@
     (progn
       (require-package 'ccls)
       (require-package 'xcscope)
-      
+      (require-package 'clang-format)
       ;; c/c++/Object-c
       (setq my/c-c++-project-index-file ".ccls")
       (with-eval-after-load 'projectile
