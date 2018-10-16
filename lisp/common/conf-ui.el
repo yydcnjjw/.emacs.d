@@ -13,8 +13,10 @@
 (add-hook 'after-init-hook
           (lambda ()
             (load-theme 'spacemacs-dark t)
-            (global-hl-line-mode)
-            (global-linum-mode)))
+            (my/add-hook-prog-and-text-mode
+             (lambda ()
+               (linum-mode)
+               (hl-line-mode)))))
 
 (setq ring-bell-function 'ignore)
 
