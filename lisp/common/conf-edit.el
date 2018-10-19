@@ -6,7 +6,8 @@
 (require-package 'hungry-delete)
 (dolist (hook '(emacs-lisp-mode-hook
                 c-mode-hook
-                c++-mode-hook))
+                c++-mode-hook
+                cmake-mode-hook))
   (add-hook hook #'hungry-delete-mode))
 
 ;; Modify the default function `set-mark-command' key
@@ -74,5 +75,12 @@
         '(("github\\.com" . gfm-mode)
           ("redmine" . textile-mode))))
 (add-hook 'after-init-hook 'atomic-chrome-start-server)
+
+;; conf `origami'
+(require-package 'origami)
+(with-eval-after-load 'origami
+  (define-key origami-mode-map (kbd "<C-s-return>") 'origami-recursively-toggle-node)
+  (define-key origami-mode-map (kbd "<C-S-return>") 'origami-show-only-node))
+(add-hook 'prog-mode-hook 'origami-mode)
 
 (provide 'conf-edit)

@@ -1,5 +1,4 @@
 (require-package 'company)
-(require-package 'company-quickhelp)
 (with-eval-after-load 'company
   (define-key company-active-map (kbd "M-n") nil)
   (define-key company-active-map (kbd "M-p") nil)
@@ -17,6 +16,10 @@
 (defun my/local-push-company-backend (backend)
   (make-local-variable 'company-backends)
   (push backend company-backends))
+
+(require-package 'company-quickhelp)
+(with-eval-after-load 'company
+  '(define-key company-active-map (kbd "C-c h") #'company-quickhelp-manual-begin))
 
 (require-package 'lsp-ui)
 (defcustom enable-lsp-ui t
