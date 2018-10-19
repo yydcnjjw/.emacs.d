@@ -24,9 +24,19 @@
 (setq skeletor-user-directory "~/.emacs.d/lisp/lib/template")
 
 (defun my/projectile-project-root ()
+  "no project return default-directory"
   (setq projectile-require-project-root nil)
   (setq project-root-dir (projectile-project-root))
   (setq projectile-require-project-root t)
   project-root-dir)
+
+(defun reload-dir-locals-for-project ()
+  "For every buffer with the same `projectile-project-root' as the 
+current buffer's, reload dir-locals."
+  (interactive)
+  (dolist (buffer (projectile-project-buffer-names))
+    (with-current-buffer buffer
+      (reload-dir-locals-for-curent-buffer))))
+
 
 (provide 'conf-projectile)

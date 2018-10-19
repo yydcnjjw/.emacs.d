@@ -21,4 +21,11 @@
       (set-visited-file-name new-name)
       (rename-buffer new-name))))
 
+;; https://emacs.stackexchange.com/questions/13080/reloading-directory-local-variables
+(defun reload-dir-locals-for-curent-buffer ()
+  "reload dir locals for the current buffer"
+  (interactive)
+  (let ((enable-local-variables :all))
+    (hack-dir-local-variables-non-file-buffer)))
+
 (provide 'file-utils)
