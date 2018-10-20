@@ -1,11 +1,3 @@
-(skeletor-define-template "cmake-project"
-  :title "cmake-project"
-  :requires-executables '(("cmake" . "require cmake"))
-  :after-creation
-  (lambda (dir)
-    (skeletor-async-shell-command (format
-				   "cd build/Debug;cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON %s;ln -s %s/build/Debug/compile_commands.json %s/compile_commands.json" dir dir dir))))
-
 (defun my/set-cmake-project-default-configure ()
   (interactive)
   (defvar-local configure-file (concat my/lisp-lib-path "template/cmake-project/.dir-locals.el"))
@@ -16,7 +8,7 @@
 (defvar-local cmake/build-dir "debug")
 
 (defun my/cmake-configure-cmd()
-  (format "cmake -H. -B%s -DCMAKE_BUILD_TYPE=%s %s" build-dir build-type build-option))
+  (format "cmake -H. -B%s -DCMAKE_BUILD_TYPE=%s %s" cmake/build-dir cmake/build-type cmake/build-option))
 (defun my/cmake-compilation-cmd()
   (format "cmake --build %s" cmake/build-dir))
 (defun my/cmake-run-cmd()
@@ -27,4 +19,13 @@
                                   :compile 'my/cmake-compilation-cmd
                                   :run 'my/cmake-run-cmd
                                   :test "ctest")
+
+(skeletor-define-template "cmake-project"
+  :title "cmake-project"
+  :requires-executables '(("cmake" . "require cmake"))
+  :after-creation
+  (lambda (dir)
+    (skeletor-async-shell-command (format
+				   "cmake -H. -B%s -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON;ln -s %s/%s/compile_commands.json %s/compile_commands.json" cmake/build-dir dir cmake/build-dir dir))))
+
 (provide 'conf-cmake-project)

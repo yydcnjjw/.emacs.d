@@ -3,4 +3,5 @@ project(__PROJECT-NAME__)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(__PROJECT-NAME__ main.cpp)
+add_subdirectory(src)
+add_subdirectory(test)

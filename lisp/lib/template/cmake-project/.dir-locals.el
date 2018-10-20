@@ -2,6 +2,6 @@
 ;;; For more information see (info "(emacs) Directory Variables")
 
 ((nil .
-      ((build-type . "Debug")
-       (build-option . "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON")
-       (build-dir . "debug"))))
+      ((cmake/build-type . "Debug")
+       (cmake/build-option . "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON")
+       (cmake/build-dir . "debug"))))
