@@ -13,9 +13,9 @@
 (add-hook 'after-init-hook
           (lambda ()
             (load-theme 'spacemacs-dark t)
+            (add-hook 'prog-mode-hook 'linum-mode)
             (my/add-hook-prog-and-text-mode
              (lambda ()
-               (linum-mode)
                (hl-line-mode)))))
 
 (setq ring-bell-function 'ignore)

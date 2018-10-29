@@ -8,5 +8,5 @@
 (require 'conf-translate)
 (require 'conf-version-control)
 (require 'conf-docker)
-
+(require 'conf-pdf)
 (provide 'load-common)
