@@ -13,7 +13,6 @@
 (require-package 'org-download)
 (with-eval-after-load 'org-download
   (setq-default org-download-image-dir "./image")
-  ;; (add-hook 'dired-mode-hook 'org-download-enable)
   (define-key org-mode-map (kbd "s-c") 'org-download-screenshot)
   (when (executable-find "spectacle")
     (setq org-download-screenshot-method (format "spectacle -r -b -n -o %s" org-download-screenshot-file)))
@@ -31,15 +30,17 @@
             (lambda ()
               (my/local-push-company-backend '(company-math-symbols-latex company-yasnippet))
               (org-cdlatex-mode)))
-  (setq org-latex-create-formula-image-program 'imagemagick)
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
+  ;; org latex preview
+  ;; (setq org-preview-latex-default-process 'imagemagick)
+  (setq org-preview-latex-default-process 'dvisvgm)
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.4))
   (setq org-format-latex-options (plist-put org-format-latex-options :foreground "White"))
-  (setq org-preview-latex-default-process 'imagemagick)
   (defmacro by-backend (&rest body)
     `(case org-export-current-backend ,@body))
   
   (require 'org2ctex)
-  (org2ctex-toggle t))
+  (org2ctex-toggle t)
+  )
 
 (defun my/conf-org-company ()
   (my/local-push-company-backend '(company-math-symbols-latex company-capf company-yasnippet))
