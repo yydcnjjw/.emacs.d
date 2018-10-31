@@ -16,7 +16,8 @@
             (add-hook 'prog-mode-hook 'linum-mode)
             (my/add-hook-prog-and-text-mode
              (lambda ()
-               (hl-line-mode)))))
+               (hl-line-mode)
+               (display-line-numbers-mode)))))
 
 (setq ring-bell-function 'ignore)
 
