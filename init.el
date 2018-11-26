@@ -14,9 +14,16 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-download-backend "wget \"%s\" -O \"%s\"")
  '(safe-local-variable-values
    (quote
-    ((cmake/build-option . "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DSYSTEM_CLANG=on -DUSE_SHARED_LLVM=on -DLLVM_ENABLE_RTTI=on")
+    ((my/ld-library-path "")
+     (my/python-path "")
+     (projectile-project-run-cmd . "python ")
+     (projectile-project-compilation-cmd . "")
+     (my/venv . "python3")
+     (projectile-project-configure-cmd . "")
+     (cmake/build-option . "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DSYSTEM_CLANG=on -DUSE_SHARED_LLVM=on -DLLVM_ENABLE_RTTI=on")
      (cmake/build-dir . "build")
      (cmake/build-type . "Build")
      (qt/build-file . "translation.pro")
