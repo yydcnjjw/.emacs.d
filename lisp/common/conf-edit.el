@@ -1,3 +1,5 @@
+(prefer-coding-system 'utf-8)
+
 (setq shell-file-name "/bin/bash")
 (fset 'yes-or-no-p 'y-or-n-p)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -82,5 +84,10 @@
   (define-key origami-mode-map (kbd "<C-s-return>") 'origami-recursively-toggle-node)
   (define-key origami-mode-map (kbd "<C-S-return>") 'origami-show-only-node))
 (add-hook 'prog-mode-hook 'origami-mode)
+
+(setq fill-column 80
+      select-enable-clipboard t
+      initial-scratch-message ""
+      cursor-in-non-selected-windows t)
 
 (provide 'conf-edit)
