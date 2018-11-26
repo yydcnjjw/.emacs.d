@@ -1,8 +1,17 @@
+(setq c-default-style '((c-mode . "linux")
+			(c++-mode . "linux"))
+      c-basic-offset 2)
+
+(defun my/lsp-complete-p ()
+  (let ((project-root-dir (projectile-project-p)))
+    (if (or (file-exists-p (expand-file-name "compile_commands.json" project-root-dir))
+            (file-exists-p (expand-file-name ".ccls" project-root-dir)))
+        t
+      nil)))
+
 (if (executable-find ccls-executable)
     (progn
       (require-package 'ccls)
-      (require-package 'xcscope)
-      (require-package 'clang-format)
       ;; c/c++/Object-c
       (setq my/c-c++-project-index-file ".ccls")
       (with-eval-after-load 'projectile
@@ -42,35 +51,23 @@
         (my/lsp-ui-peek-enable)
         (lsp-ccls-enable))
 
-      (defun my/c-c++-mode-code-format ()
-        (setq c-default-style '((c-mode . "linux")
-			        (c++-mode . "linux"))
-              c-basic-offset 2))
-
       ;; configure-c-c++-company
       (dolist (hook '(c-mode-hook
                       c++-mode-hook))
         (add-hook
          hook (lambda ()
-                (my/c-c++-mode-code-format)
-                (when (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
-                  (when (and buffer-file-name (not buffer-read-only))
-                    (let ((project-type (projectile-project-type)))
-                      (if (equal project-type 'linux-kernel)
-                          (progn
-                            (require 'xcscope)
-                            (cscope-minor-mode 1)
-                            (my/local-push-company-backend
-                             '(company-dabbrev-code company-gtags company-etags)))
-                        (progn
-                          (setq tags-file-name system-tags-url)
-                          (when (equal project-type nil)
-                            (let ((index-file (expand-file-name my/c-c++-project-index-file default-directory)))
-                              (unless (file-exists-p index-file)
-                                (shell-command (format "cp ~/.emacs.d/lisp/lib/template/ccls-once-file-template %s" index-file)))))
-                          (my/configure-lsp-company)
-                          (my/lsp-ccls-enable)
-                          )))))))))
+                (when (my/lsp-complete-p)
+                  (setq tags-file-name system-tags-url)
+                  (my/configure-lsp-company)
+                  (my/lsp-ccls-enable)))))
+
+      (defun my/add-ccls-custom-index-file ()
+        (if (projectile-project-p)
+            (let ((index-file (expand-file-name my/c-c++-project-index-file default-directory)))
+              (unless (file-exists-p index-file)
+                (shell-command (format "cp ~/.emacs.d/lisp/lib/template/ccls-once-file-template %s" index-file))))
+          (message "not project")))
+      )
   (message "option: require ccls executable set `ccls-executable'"))
 
 (require-package 'cmake-mode)
@@ -78,4 +75,30 @@
   (my/local-push-company-backend '(company-cmake company-yasinppet)))
 (add-hook 'cmake-mode-hook #'my/cmake-company)
 
+(require-package 'xcscope)
+(require-package 'ggtags)
+(require-package 'clang-format)
+
+(require-package 'company-c-headers)
+(setq company-c-headers-path-system '("/usr/include"))
+
+(dolist (hook '(c-mode-hook
+                c++-mode-hook
+                asm-mode-hook))
+  (add-hook
+   hook (lambda ()
+          (unless (my/lsp-complete-p)
+            (require 'xcscope)
+;;            (ggtags-mode)
+            (cscope-minor-mode 1)
+            (flycheck-mode)
+            (my/local-push-company-backend '(company-gtags company-dabbrev-code))
+            (my/local-push-company-backend 'company-c-headers)
+            ))))
+
+(setq gtags-lib-path '("/usr/include"))
+(setenv "MAKEOBJDIRPREFIX" (file-truename "/home/yydcnjjw/resources/basic/tags"))
+(dolist (dir gtags-lib-path)
+  (my/append-env-value "GTAGSLIBPATH"
+                       dir))
 (provide 'conf-c-c++)

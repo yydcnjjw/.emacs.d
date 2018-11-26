@@ -12,7 +12,7 @@
 (dir-locals-set-class-variables 'my/view-mode
                                 '((nil . ((eval . (my/view-mode-fun))))))
 
-(setq view-mode-file-dir
+(setq my/view-mode-file-dirs
       '("~/.emacs.d/elpa"
         "/usr/include"
         "/usr/local/include"
@@ -22,12 +22,15 @@
         "/usr/local/share/emacs"
         "/usr/share/emacs"))
 
+(dolist (dir view-mode-file-dirs)
+  (add-to-list 'my/view-mode-file-dirs dir))
+
 (defun my/load-dir-view-mode ()
-  (dolist (dir view-mode-file-dir)
+  (dolist (dir my/view-mode-file-dirs)
     (dir-locals-set-directory-class dir 'my/view-mode)))
 
 (defun my/add-dir-to-view-mode (dir)
-  (add-to-list 'view-mode-file-dir dir)
+  (add-to-list 'my/view-mode-file-dirs dir)
   (my/load-dir-view-mode))
 (add-hook 'after-init-hook 'my/load-dir-view-mode)
 
