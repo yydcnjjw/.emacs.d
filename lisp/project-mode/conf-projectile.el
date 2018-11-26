@@ -1,4 +1,5 @@
 (require-package 'projectile)
+
 (when (executable-find "ag")
   (require-package 'ag))
 (require-package 'skeletor)
@@ -6,13 +7,14 @@
 (setq projectile-completion-system 'ivy)
 (setq projectile-enable-caching t)
 (projectile-global-mode)
+
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 (defun my/projectile-dynamic-change-index-method()
   (when (projectile-project-p)
     (if (eq (projectile-project-vcs) 'none)
         (setq projectile-indexing-method 'native)
-      (setq projectile-indexing-method 'turbo-alien))))
+      (setq projectile-indexing-method 'alien))))
 
 (defun my/projectile-custom-switch-action()
   (my/projectile-dynamic-change-index-method)
@@ -38,6 +40,5 @@ current buffer's, reload dir-locals."
   (dolist (buffer (projectile-project-buffer-names))
     (with-current-buffer buffer
       (reload-dir-locals-for-curent-buffer))))
-
 
 (provide 'conf-projectile)

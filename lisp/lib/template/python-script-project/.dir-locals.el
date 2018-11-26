@@ -1,13 +1,8 @@
-;;; Directory Local Variables
-;;; For more information see (info "(emacs) Directory Variables")
-
 ((nil .
-      ((eval . (progn
-		(setq projectile-project-configure-cmd "")
-		(setq projectile-project-compilation-cmd "")
-		(setq projectile-project-run-cmd "python ")))
-       (my/venv . "math")))
+      ((projectile-project-configure-cmd . "")
+       (projectile-project-compilation-cmd "")
+       (projectile-project-run-cmd "python ")
+       (my/venv . "python3")))
  (python-mode .
               ((my/python-path . (""))
                (my/ld-library-path . ("")))))
-
