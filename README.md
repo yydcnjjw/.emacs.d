@@ -18,7 +18,7 @@ Setting `support-languages` for configure support language.
 - `hunspell`
 - python package: jieba
 - `ag`
-- 
+-
 - [intellij-lsp-server](https://github.com/Ruin0x11/intellij-lsp-server)
   ```Makefile
   ./gradlew clean buildPlugin

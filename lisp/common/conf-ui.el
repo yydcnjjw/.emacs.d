@@ -7,8 +7,9 @@
   (menu-bar-mode -1)
   (scroll-bar-mode -1)
   (column-number-mode 1)
-  (setq frame-resize-pixelwise t)
-  (setq inhibit-splash-screen 1))
+  (setq
+   frame-resize-pixelwise t
+   inhibit-splash-screen 1))
 
 (require-package 'spacemacs-theme)
 
