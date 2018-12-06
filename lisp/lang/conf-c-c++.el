@@ -40,7 +40,7 @@
       (defun my/lsp-ccls-enable ()
         (setq ccls-extra-args '("--log-file=/tmp/ccls.log"))
         (setq
-         ccls-extra-init-params
+         ccls-initialization-options
          '(:completion
            (:include
             (:blacklist ["^/usr/(local/)?include/c\\+\\+/[0-9\\.]+/(bits|tr1|tr2|profile|ext|debug)/"
@@ -49,7 +49,8 @@
               company-lsp-async t
               company-lsp-cache-candidates nil)
         (my/lsp-ui-peek-enable)
-        (lsp-ccls-enable))
+        (require 'ccls)
+        (lsp))
 
       ;; configure-c-c++-company
       (dolist (hook '(c-mode-hook
@@ -89,8 +90,8 @@
    hook (lambda ()
           (unless (my/lsp-complete-p)
             (require 'xcscope)
-;;            (ggtags-mode)
             (cscope-minor-mode 1)
+            (ggtags-mode)
             (flycheck-mode)
             (my/local-push-company-backend '(company-gtags company-dabbrev-code))
             (my/local-push-company-backend 'company-c-headers)

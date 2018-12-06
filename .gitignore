@@ -11,6 +11,7 @@ lisp/conf-custom.el
 .last-package-update-day
 .directory
 .projectile
+.lsp-session
 bookmarks
 projectile-bookmarks.eld
 projectile.cache
