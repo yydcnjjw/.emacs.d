@@ -1,8 +1,7 @@
 (defun my/view-mode-fun ()
   (when buffer-file-name
-    (when buffer-file-read-only
+    (unless (file-writable-p buffer-file-name)
       (my/disable-minor-modes '(company-mode
-                                lsp-mode
                                 flycheck-mode
                                 yas-minor-mode
                                 hungry-delete-mode
@@ -20,7 +19,8 @@
         "/usr/lib"
         "/usr/local/src/emacs"
         "/usr/local/share/emacs"
-        "/usr/share/emacs"))
+        "/usr/share/emacs"
+        "/usr/share/racket"))
 
 (dolist (dir view-mode-file-dirs)
   (add-to-list 'my/view-mode-file-dirs dir))
