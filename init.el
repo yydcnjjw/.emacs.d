@@ -17,7 +17,9 @@
  '(org-download-backend "wget \"%s\" -O \"%s\"")
  '(safe-local-variable-values
    (quote
-    ((my/ld-library-path "")
+    ((projectile-project-configure-cmd . "./autogen.sh;./configure")
+     (projectile-project-compilation-cmd . "make")
+     (my/ld-library-path "")
      (my/python-path "")
      (projectile-project-run-cmd . "python ")
      (projectile-project-compilation-cmd . "")
