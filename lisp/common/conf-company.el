@@ -21,7 +21,13 @@
 (with-eval-after-load 'company
   '(define-key company-active-map (kbd "C-c h") #'company-quickhelp-manual-begin))
 
+(require-package 'lsp-mode)
 (require-package 'lsp-ui)
+(require-package 'flycheck)
+
+;; disable flymake at lsp-mode
+(setq lsp-prefer-flymake nil)
+
 (defcustom enable-lsp-ui t
   ""
   :type 'boolean)
@@ -32,8 +38,6 @@
     (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
     (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)))
 
-(require-package 'lsp-mode)
-(require-package 'flycheck)
 (add-hook 'lsp-mode-hook
           (lambda ()
             (my/enable-lsp-ui)
