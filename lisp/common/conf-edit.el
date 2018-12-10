@@ -96,6 +96,6 @@
       cursor-in-non-selected-windows t)
 
 ;; delete trailing whitespace
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (provide 'conf-edit)
