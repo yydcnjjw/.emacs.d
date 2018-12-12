@@ -11,6 +11,9 @@
 (dir-locals-set-class-variables 'my/view-mode
                                 '((nil . ((eval . (my/view-mode-fun))))))
 
+(defcustom view-mode-file-dirs
+  '())
+
 (setq my/view-mode-file-dirs
       '("~/.emacs.d/elpa"
         "/usr/include"
