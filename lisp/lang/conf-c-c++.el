@@ -1,6 +1,6 @@
 (setq c-default-style '((c-mode . "linux")
 			(c++-mode . "linux"))
-      c-basic-offset 2)
+      c-basic-offset 4)
 
 (defun my/lsp-complete-p ()
   (let ((project-root-dir (projectile-project-p)))
