@@ -1,0 +1,6 @@
+[submodule "lisp/site-packages/insert-translated-name"]
+	path = lisp/site-packages/insert-translated-name
+	url = https://github.com/manateelazycat/insert-translated-name.git
+[submodule "lisp/site-packages/company-english-helper"]
+	path = lisp/site-packages/company-english-helper
+	url = https://github.com/manateelazycat/company-english-helper.git
