@@ -93,8 +93,8 @@
 (setq fill-column 80
       select-enable-clipboard t
       initial-scratch-message ""
-      cursor-in-non-selected-windows t)
-
+      cursor-in-non-selected-windows t
+      tab-width 4)
 ;; delete trailing whitespace
 ;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
 

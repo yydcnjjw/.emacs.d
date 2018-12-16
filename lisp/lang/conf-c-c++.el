@@ -1,5 +1,4 @@
-(setq c-default-style '((c-mode . "linux")
-			(c++-mode . "linux"))
+(setq c-default-style "linux"
       c-basic-offset 4)
 
 (defun my/lsp-complete-p ()
@@ -38,7 +37,7 @@
             (lsp-ui-peek-find-custom 'member "$ccls/member" `(:kind ,kind)))))
 
       (defun my/lsp-ccls-enable ()
-        (setq ccls-extra-args '("--log-file=/tmp/ccls.log"))
+        (setq ccls-args '("--log-file=/tmp/ccls.log"))
         (setq
          ccls-initialization-options
          '(:completion
@@ -79,7 +78,7 @@
 (require-package 'xcscope)
 (require-package 'ggtags)
 (require-package 'clang-format)
-
+(setq clang-format-style "{BasedOnStyle: LLVM, IndentWidth: 4}")
 (require-package 'company-c-headers)
 (setq company-c-headers-path-system '("/usr/include"))
 
@@ -92,12 +91,12 @@
             (require 'xcscope)
             (cscope-minor-mode 1)
             (ggtags-mode)
-            (flycheck-mode)
+            (flycheck-mode 1)
             (my/local-push-company-backend '(company-gtags company-dabbrev-code))
             (my/local-push-company-backend 'company-c-headers)
             ))))
 
-(setq gtags-lib-path '("/usr/include"))
+(setq gtags-lib-path '("/usr/include/"))
 (setenv "MAKEOBJDIRPREFIX" (file-truename "/home/yydcnjjw/resources/basic/tags"))
 (dolist (dir gtags-lib-path)
   (my/append-env-value "GTAGSLIBPATH"

@@ -57,7 +57,7 @@
      (C . t)
      (dot . t)
      (latex . t)
-     )))
+     (plantuml . t))))
 
 (require-package 'org-plus-contrib)
 (add-hook 'org-mode-hook

@@ -10,7 +10,6 @@
 	                   company-keywords
                            ;; company-capf
 	                   company-abbrev
-                           company-dabbrev-code
 	                   company-dabbrev)))
 (my/add-hook-prog-and-text-mode 'company-mode)
 

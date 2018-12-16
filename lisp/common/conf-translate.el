@@ -126,7 +126,6 @@
       )))
 
 (defun google-translate-chinese-open-word-with-web ()
-  "搜索附近的词，用浏览器打开。"
   (interactive)
   (let ((word (google-translate-chinese--region-or-word))
         from to)
@@ -135,7 +134,6 @@
       (if (chinese-word-cjk-string-p word)
           (setq from "zh-CN" to "en")
         (setq from "en" to "zh-Cn"))
-      ;; URL 格式：比如需要搜索 "example" (en => zh-Cn), URL `https://translate.google.cn/#en/zh-CN/example'
       (browse-url (concat "https://translate.google.cn/#"
                           from "/" to "/"
                           (url-hexify-string word))))))
