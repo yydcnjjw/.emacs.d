@@ -131,4 +131,14 @@
 (with-eval-after-load 'org
   (setcdr (assoc "\\.pdf\\'" org-file-apps) "okular %s"))
 
+;; org brain
+(require-package 'org-brain)
+(setq org-brain-path "~/workspace/GTD/brain/"
+      org-id-track-globally t
+      org-brain-visualize-default-choices 'all
+      org-brain-title-max-length 12)
+(push '("b" "Brain" plain (function org-brain-goto-end)
+        "* %i%?" :empty-lines 1)
+      org-capture-templates)
+
 (provide 'conf-org)
