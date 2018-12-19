@@ -1,3 +1,5 @@
+(require-package 'ht)
+
 (defvar system-tags-url "~/resources/basic/tags/SYSTAGS")
 (defconst my/lisp-lib-path "~/.emacs.d/lisp/lib/")
 

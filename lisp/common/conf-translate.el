@@ -152,7 +152,9 @@
       (insert selected))))
 
 (require 'insert-translated-name)
+(require 'company-english-helper)
 (global-set-key (kbd "C-c C") 'google-translate-chinese-search-at-point-and-replace)
+(global-set-key (kbd "C-c M-c") 'toggle-company-english-helper)
 (dolist (hook (list
                'org-mode-hook
                'atomic-chrome-edit-mode-hook

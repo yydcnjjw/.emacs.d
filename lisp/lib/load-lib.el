@@ -1,5 +1,4 @@
 (require 'cl)
-(require-package 'ht)
 (require 'util)
 (require 'file-utils)
 (provide 'load-lib) 

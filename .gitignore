@@ -13,6 +13,8 @@ lisp/conf-custom.el
 .projectile
 .lsp-session
 .lsp-session-v1
+.org-id-locations
+.projectile
 bookmarks
 projectile-bookmarks.eld
 projectile.cache
