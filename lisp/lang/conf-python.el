@@ -11,7 +11,8 @@
     (lsp-register-client
      (make-lsp-client :new-connection (lsp-stdio-connection "pyls")
                       :major-modes '(python-mode)
-                      :server-id 'pyls)))
+                      :server-id 'pyls))
+    (add-hook 'python-mode-hook 'lsp))
   (when (executable-find "pyls")
     (defun my/python-company ()
       (my/lsp-python)
