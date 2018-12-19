@@ -6,10 +6,15 @@
           python-shell-interpreter-args "--simple-prompt -i")))
 
 (defun my/set-python-lsp-support()
+  (defun my/lsp-python ()
+    (require 'lsp)
+    (lsp-register-client
+     (make-lsp-client :new-connection (lsp-stdio-connection "pyls")
+                      :major-modes '(python-mode)
+                      :server-id 'pyls)))
   (when (executable-find "pyls")
-    ;; (require-package 'lsp-python)    
     (defun my/python-company ()
-      ;; (require 'lsp-python)
+      (my/lsp-python)
       (my/configure-lsp-company)
       (setq company-transformers nil
             company-lsp-async t
