@@ -45,8 +45,7 @@
 (add-hook 'prog-mode-hook 'paredit-everywhere-mode)
 (defun my/conf-electric-pair-mode()
   (electric-pair-mode)
-  (setq electric-pair-pairs '(
-                              (?\" . ?\")
+  (setq electric-pair-pairs '((?\" . ?\")
                               (?\' . ?\')
                               (?\( . ?\))
                               (?\{ . ?\})
