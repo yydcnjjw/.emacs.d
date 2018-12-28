@@ -9,6 +9,9 @@
 (dolist (hook '(emacs-lisp-mode-hook
                 c-mode-hook
                 c++-mode-hook
+                web-mode-hook
+                html-mode-hook
+                js-mode-hook
                 cmake-mode-hook
                 scheme-mode-hook))
   (add-hook hook #'hungry-delete-mode))
@@ -82,19 +85,15 @@
           ("redmine" . textile-mode))))
 (add-hook 'after-init-hook 'atomic-chrome-start-server)
 
-;; conf `origami'
-;; (require-package 'origami)
-;; (with-eval-after-load 'origami
-;;   (define-key origami-mode-map (kbd "<C-s-return>") 'origami-recursively-toggle-node)
-;;   (define-key origami-mode-map (kbd "<C-S-return>") 'origami-show-only-node))
-;; (add-hook 'prog-mode-hook 'origami-mode)
+;; conf exec-path from shell
+(require-package 'exec-path-from-shell)
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
 
 (setq fill-column 80
       select-enable-clipboard t
       initial-scratch-message ""
       cursor-in-non-selected-windows t
       tab-width 4)
-;; delete trailing whitespace
-;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (provide 'conf-edit)

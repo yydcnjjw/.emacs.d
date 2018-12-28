@@ -17,6 +17,7 @@
 
 (setq my/view-mode-file-dirs
       '("~/.emacs.d/elpa"
+        "~/.emacs.d/site-packages/web-lsp"
         "/usr/include"
         "/usr/local/include"
         "~/.local/lib"
