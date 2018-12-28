@@ -24,10 +24,10 @@
 (add-hook 'web-mode-hook #'my/lsp-enable)
 (add-hook 'css-mode-hook #'my/lsp-enable)
 
-(defun lsp-js-enable ()
+(defun my/lsp-js-enable ()
   (my/lsp-enable)
   (define-key lsp-ui-mode-map [remap js-find-symbol] #'lsp-ui-peek-find-definitions))
-(add-hook 'js-mode-hook #'lsp-js-enable)
+(add-hook 'js-mode-hook #'my/lsp-js-enable)
 
 (require-package 'emmet-mode)
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
