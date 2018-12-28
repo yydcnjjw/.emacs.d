@@ -18,7 +18,7 @@
               (append '("compile_commands.json"
                         ".ccls")
                       projectile-project-root-files-top-down-recurring)))
-      (defun my/lsp-ui-peek-enable()
+      (defun my/ccls-lsp-ui-peek-enable()
         (when enable-lsp-ui          
           (defun my/c-c++-callee ()
             (interactive)
@@ -47,9 +47,9 @@
         (setq company-transformers nil
               company-lsp-async t
               company-lsp-cache-candidates nil)
-        (my/lsp-ui-peek-enable)
+        (my/ccls-lsp-ui-peek-enable)
         (require 'ccls)
-        (lsp))
+        (my/lsp-enable))
 
       ;; configure-c-c++-company
       (dolist (hook '(c-mode-hook

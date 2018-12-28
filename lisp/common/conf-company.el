@@ -38,11 +38,6 @@
     (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
     (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)))
 
-(add-hook 'lsp-mode-hook
-          (lambda ()
-            (my/enable-lsp-ui)
-            (flycheck-mode 1)))
-
 (require-package 'company-lsp)
 (defun my/configure-lsp-company ()
   (require 'company-lsp)
@@ -50,5 +45,12 @@
   (setq company-lsp-enable-recompletion t)
   (global-set-key (kbd "M-RET") 'lsp-execute-code-action)
   (my/local-push-company-backend 'company-lsp))
+
+(defun my/lsp-enable ()
+  (require 'lsp-mode)
+  (my/enable-lsp-ui)
+  (flycheck-mode 1)
+  (my/configure-lsp-company)
+  (lsp))
 
 (provide 'conf-company)

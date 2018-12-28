@@ -6,30 +6,13 @@
           python-shell-interpreter-args "--simple-prompt -i")))
 
 (defun my/set-python-lsp-support()
-  (defun my/lsp-python ()
-    (require 'lsp)
-    (lsp-register-client
-     (make-lsp-client :new-connection (lsp-stdio-connection "pyls")
-                      :major-modes '(python-mode)
-                      :server-id 'pyls))
-    (add-hook 'python-mode-hook 'lsp))
   (when (executable-find "pyls")
-    (defun my/python-company ()
-      (my/lsp-python)
-      (my/configure-lsp-company)
+    (defun my/lsp-python-enable ()
       (setq company-transformers nil
             company-lsp-async t
             company-lsp-cache-candidates t)
-      ;; (let ((root-dir (my/projectile-project-root))
-      ;;       (setup-py-file ""))
-      ;;   (set 'setup-py-file (expand-file-name "tox.ini" root-dir))
-      ;;   (unless (file-exists-p setup-py-file)
-      ;;     (write-region "" nil setup-py-file t)))
-      ;; (lsp-python-enable)
-      )
-    (add-hook 'python-mode-local-vars-hook #'my/python-company)
-    (when (eq major-mode 'python-mode)
-      (my/python-company))))
+      (my/lsp-enable))
+    (add-hook 'python-mode-local-vars-hook #'my/lsp-python-enable)))
 
 (defun my/set-python-jupyter-support()
   "jupyter support"
