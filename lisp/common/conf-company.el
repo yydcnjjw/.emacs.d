@@ -28,21 +28,14 @@
 ;; disable flymake at lsp-mode
 (setq lsp-prefer-flymake nil)
 
-(defcustom enable-lsp-ui t
-  ""
-  :type 'boolean)
-
 (defun my/enable-lsp-ui()
-  (when enable-lsp-ui
-    (lsp-ui-mode 1)
-    (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)))
+  (lsp-ui-mode 1)
+  (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
 
 (require-package 'company-lsp)
 (defun my/configure-lsp-company ()
   (require 'company-lsp)
-  (setq company-lsp-enable-snippet t)
-  (setq company-lsp-enable-recompletion t)
   (global-set-key (kbd "M-RET") 'lsp-execute-code-action)
   (my/local-push-company-backend 'company-lsp))
 

@@ -1,15 +1,16 @@
 (defconst my/en-font "hack 12")
 (set-frame-font my/en-font)
 
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+(setq inhibit-splash-screen 1)
+
 (when window-system
   (setq-default cursor-type 'bar)
-  (tool-bar-mode -1)
-  (menu-bar-mode -1)
-  (scroll-bar-mode -1)
   (column-number-mode 1)
   (setq
-   frame-resize-pixelwise t
-   inhibit-splash-screen 1))
+   frame-resize-pixelwise t))
 
 (require-package 'spacemacs-theme)
 

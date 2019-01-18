@@ -1,6 +1,6 @@
 (prefer-coding-system 'utf-8)
 
-(setq shell-file-name "/bin/bash")
+(setq shell-file-name "/bin/zsh")
 (fset 'yes-or-no-p 'y-or-n-p)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (setq-default indent-tabs-mode nil)
@@ -46,14 +46,7 @@
 ;; pair
 (require-package 'paredit-everywhere)
 (add-hook 'prog-mode-hook 'paredit-everywhere-mode)
-(defun my/conf-electric-pair-mode()
-  (electric-pair-mode)
-  (setq electric-pair-pairs '((?\" . ?\")
-                              (?\' . ?\')
-                              (?\( . ?\))
-                              (?\{ . ?\})
-                              )))
-(add-hook 'prog-mode-hook 'my/conf-electric-pair-mode)
+(add-hook 'prog-mode-hook 'electric-pair-mode)
 
 ;; auto save
 (setq auto-save-visited-interval 1)

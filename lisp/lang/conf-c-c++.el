@@ -1,13 +1,6 @@
 (setq c-default-style "linux"
       c-basic-offset 4)
 
-(defun my/lsp-complete-p ()
-  (let ((project-root-dir (projectile-project-p)))
-    (if (or (file-exists-p (expand-file-name "compile_commands.json" project-root-dir))
-            (file-exists-p (expand-file-name ".ccls" project-root-dir)))
-        t
-      nil)))
-
 (if (executable-find ccls-executable)
     (progn
       (require-package 'ccls)
@@ -18,23 +11,6 @@
               (append '("compile_commands.json"
                         ".ccls")
                       projectile-project-root-files-top-down-recurring)))
-      (defun my/ccls-lsp-ui-peek-enable()
-        (when enable-lsp-ui          
-          (defun my/c-c++-callee ()
-            (interactive)
-            (lsp-ui-peek-find-custom 'callee "$ccls/call" '(:callee t)))
-          (defun my/c-c++-caller ()
-            (interactive)
-            (lsp-ui-peek-find-custom 'caller "$ccls/call"))
-          (defun my/c-c++-vars (kind)
-            (lsp-ui-peek-find-custom 'vars "$ccls/vars" `(:kind ,kind)))
-          (defun my/c-c++-base (levels)
-            (lsp-ui-peek-find-custom 'base "$ccls/inheritance" `(:levels ,levels)))
-          (defun my/c-c++derived (levels)
-            (lsp-ui-peek-find-custom 'derived "$ccls/inheritance" `(:levels ,levels :derived t)))
-          (defun my/c-c++member (kind)
-            (interactive)
-            (lsp-ui-peek-find-custom 'member "$ccls/member" `(:kind ,kind)))))
 
       (defun my/lsp-ccls-enable ()
         (setq ccls-args '("--log-file=/tmp/ccls.log"))
@@ -47,19 +23,22 @@
         (setq company-transformers nil
               company-lsp-async t
               company-lsp-cache-candidates nil)
-        (my/ccls-lsp-ui-peek-enable)
         (require 'ccls)
         (my/lsp-enable))
-
+      (defun my/lsp-complete-p ()
+        (let ((project-root-dir (projectile-project-p)))
+          (if (or (file-exists-p (expand-file-name "compile_commands.json" project-root-dir))
+                  (file-exists-p (expand-file-name ".ccls" project-root-dir)))
+              t
+            nil)))
       ;; configure-c-c++-company
       (dolist (hook '(c-mode-hook
                       c++-mode-hook))
         (add-hook
          hook (lambda ()
                 (when (my/lsp-complete-p)
-                  (setq tags-file-name system-tags-url)
-                  (my/configure-lsp-company)
-                  (my/lsp-ccls-enable)))))
+                  (my/lsp-ccls-enable)
+                  ))))
 
       (defun my/add-ccls-custom-index-file ()
         (if (projectile-project-p)
@@ -70,35 +49,43 @@
       )
   (message "option: require ccls executable set `ccls-executable'"))
 
-(require-package 'cmake-mode)
-(defun my/cmake-company ()
-  (my/local-push-company-backend '(company-cmake company-yasinppet)))
-(add-hook 'cmake-mode-hook #'my/cmake-company)
-
-(require-package 'xcscope)
-(require-package 'ggtags)
 (require-package 'clang-format)
 (setq clang-format-style "{BasedOnStyle: LLVM, IndentWidth: 4}")
-(require-package 'company-c-headers)
-(setq company-c-headers-path-system '("/usr/include"))
 
-(dolist (hook '(c-mode-hook
-                c++-mode-hook
-                asm-mode-hook))
-  (add-hook
-   hook (lambda ()
-          (unless (my/lsp-complete-p)
-            (require 'xcscope)
-            (cscope-minor-mode 1)
-            (ggtags-mode)
-            (flycheck-mode 1)
-            (my/local-push-company-backend '(company-gtags company-dabbrev-code))
-            (my/local-push-company-backend 'company-c-headers)
-            ))))
+(when (executable-find "gtags")
+  (require-package 'xcscope)
+  (require-package 'ggtags)
+  (require-package 'company-c-headers)
+  (setq company-c-headers-path-system '("/usr/include"))
+  (defun tag-find-enable ()
+    (interactive)
+    (unless (or (my/lsp-complete-p) (minor-mode-p 'lsp-mode))
+      (require 'xcscope)
+      (cscope-minor-mode 1)
+      (ggtags-mode)))
+  (defun tag-complete-enable ()
+    (interactive)
+    (unless (or (my/lsp-complete-p) (minor-mode-p 'lsp-mode))
+      (require 'xcscope)
+      (cscope-minor-mode 1)
+      (ggtags-mode)
+      (flycheck-mode 1)
+      (my/local-push-company-backend '(company-gtags company-dabbrev-code))
+      (my/local-push-company-backend 'company-c-headers)))
+  (setq gtags-lib-path '("/usr/include/"))
+  (setenv "MAKEOBJDIRPREFIX" (file-truename "/home/yydcnjjw/resources/basic/tags"))
+  (dolist (dir gtags-lib-path)
+    (my/append-env-value "GTAGSLIBPATH"
+                         dir)))
 
-(setq gtags-lib-path '("/usr/include/"))
-(setenv "MAKEOBJDIRPREFIX" (file-truename "/home/yydcnjjw/resources/basic/tags"))
-(dolist (dir gtags-lib-path)
-  (my/append-env-value "GTAGSLIBPATH"
-                       dir))
+(defun c-c++-org-src-complete ()
+  (when (or (eq major-mode 'c++-mode) (eq major-mode 'c-mode))
+    (tag-complete-enable)))
+(add-hook 'org-src-mode-hook #'c-c++-org-src-complete)
+
+(when (executable-find "cmake")
+  (require-package 'cmake-mode)
+  (defun my/cmake-company ()
+    (my/local-push-company-backend '(company-cmake company-yasinppet)))
+  (add-hook 'cmake-mode-hook #'my/cmake-company))
 (provide 'conf-c-c++)

@@ -21,4 +21,18 @@
 (defun my/append-env-value (env value)
   (setenv env (concat value ":" (getenv env))))
 
+(defun which-active-modes ()
+  "Give a message of which minor modes are enabled in the current buffer."
+  (interactive)
+  (let ((active-modes))
+    (mapc (lambda (mode) (condition-case nil
+                             (if (and (symbolp mode) (symbol-value mode))
+                                 (add-to-list 'active-modes mode))
+                           (error nil) ))
+          minor-mode-list)
+    active-modes))
+
+(defun minor-mode-p (minor-mode)
+  (position minor-mode (which-active-modes)))
+
 (provide 'util)
