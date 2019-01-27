@@ -14,15 +14,11 @@
 
       (defun my/lsp-ccls-enable ()
         (setq ccls-args '("--log-file=/tmp/ccls.log"))
-        (setq
-         ccls-initialization-options
-         '(:completion
-           (:include
-            (:blacklist ["^/usr/(local/)?include/c\\+\\+/[0-9\\.]+/(bits|tr1|tr2|profile|ext|debug)/"
-                         "^/usr/(local/)?include/c\\+\\+/v1/"]))))
         (setq company-transformers nil
               company-lsp-async t
               company-lsp-cache-candidates nil)
+        (setq ccls-initialization-options
+              '(:index (:comments 2) :completion (:detailedLabel t)))
         (require 'ccls)
         (my/lsp-enable))
       (defun my/lsp-complete-p ()

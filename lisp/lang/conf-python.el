@@ -59,9 +59,9 @@
                   (setenv "PYTHONPATH" "")
                   (setenv "LD_LIBRARY_PATH" "")))
       (add-hook 'python-mode-local-vars-hook
-                (lambda ()
-                  (when (and enable-python-env my/venv)
-                    (venv-workon my/venv)))))
+                #'(lambda ()
+                    (when (and enable-python-env my/venv)
+                      (venv-workon my/venv)))))
   (progn
     (message "option: require virtualenv")
     (setq enable-python-env nil)))

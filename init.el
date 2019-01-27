@@ -17,29 +17,8 @@
  ;; If there is more than one, they won't work right.
  '(org-agenda-files
    (quote
-    ("~/workspace/GTD/task.org" "~/workspace/notebooks/org/mathematics/papers.org" "~/workspace/GTD/todo.org")))
- '(org-download-backend "wget \"%s\" -O \"%s\"")
- '(safe-local-variable-values
-   (quote
-    ((projectile-project-configure-cmd . "./autogen.sh;./configure")
-     (projectile-project-compilation-cmd . "make")
-     (my/ld-library-path "")
-     (my/python-path "")
-     (projectile-project-run-cmd . "python ")
-     (projectile-project-compilation-cmd . "")
-     (my/venv . "python3")
-     (projectile-project-configure-cmd . "")
-     (cmake/build-option . "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DSYSTEM_CLANG=on -DUSE_SHARED_LLVM=on -DLLVM_ENABLE_RTTI=on")
-     (cmake/build-dir . "build")
-     (cmake/build-type . "Build")
-     (qt/build-file . "translation.pro")
-     (qt/build-dir . "build")
-     (qt/build-option . "-spec linux-clang")
-     (qt/build-type . "Debug")
-     (cmake/build-dir . "debug")
-     (cmake/build-option . "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON")
-     (cmake/build-type . "Debug")
-     (eval my/view-mode-fun)))))
+    ("~/workspace/GTD/task.org" "~/workspace/notebooks/org/mathematics/papers.org" "~/workspace/GTD/todo.org")) t)
+ '(org-download-backend "wget \"%s\" -O \"%s\""))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -1,5 +1,8 @@
 (prefer-coding-system 'utf-8)
 
+(setq enable-local-variables :all)
+(setq enable-local-eval t)
+
 (setq shell-file-name "/bin/zsh")
 (fset 'yes-or-no-p 'y-or-n-p)
 (global-set-key (kbd "C-x C-b") 'ibuffer)

@@ -5,7 +5,6 @@
       (set-fontset-font (frame-parameter nil 'font)
                         charset
                         (font-spec :family "Noto Sans CJK SC")))
-
   (custom-set-faces
    '(org-table ((t (:family "Noto Sans Mono CJK SC")))))
   )
@@ -27,9 +26,9 @@
   (org-cdlatex-mode)
   (setq company-math-allow-latex-symbols-in-faces t)
   (add-hook 'TeX-mode-hook
-            (lambda ()
-              (my/local-push-company-backend '(company-math-symbols-latex company-yasnippet))
-              (org-cdlatex-mode)))
+            #'(lambda ()
+                (my/local-push-company-backend '(company-math-symbols-latex company-yasnippet))
+                (org-cdlatex-mode)))
   ;; org latex preview
   ;; (setq org-preview-latex-default-process 'imagemagick)
   (setq org-preview-latex-default-process 'dvisvgm)
@@ -39,12 +38,20 @@
     `(case org-export-current-backend ,@body))
   
   (require 'org2ctex)
-  (org2ctex-toggle t)
-  )
+  (org2ctex-toggle t))
 
 (defun my/conf-org-company ()
   (my/local-push-company-backend '(company-math-symbols-latex company-capf company-yasnippet))
   (add-hook 'completion-at-point-functions 'pcomplete-completions-at-point nil t))
+
+(defun my/conf-ob-ipython ()
+  (require-package 'ob-ipython)
+  (add-hook 'ob-ipython-mode-hook
+            #'(lambda ()
+                (require 'ob-ipython)
+                (my/local-push-company-backend '(company-ob-ipython)))))
+
+(my/conf-ob-ipython)
 
 (defun my/conf-org-src-mode ()
   (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
@@ -53,7 +60,7 @@
    'org-babel-load-languages
    '((emacs-lisp . t)
      (python . t)
-     ;;     (ipython . t)
+     (ipython . t)
      (C . t)
      (dot . t)
      (latex . t)
