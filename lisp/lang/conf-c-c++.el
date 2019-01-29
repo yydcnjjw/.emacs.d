@@ -14,13 +14,10 @@
 
       (defun my/lsp-ccls-enable ()
         (setq ccls-args '("--log-file=/tmp/ccls.log"))
-        (setq company-transformers nil
-              company-lsp-async t
-              company-lsp-cache-candidates nil)
         (setq ccls-initialization-options
               '(:index (:comments 2) :completion (:detailedLabel t)))
         (require 'ccls)
-        (my/lsp-enable))
+        (my/lsp-enable t))
       (defun my/lsp-complete-p ()
         (let ((project-root-dir (projectile-project-p)))
           (if (or (file-exists-p (expand-file-name "compile_commands.json" project-root-dir))

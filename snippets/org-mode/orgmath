@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: orgmath
+# key: orgmath
+# --
+#+LATEX_HEADER: \usepackage{xeCJK}
+#+LATEX_HEADER: \setCJKmainfont{Noto Sans CJK SC}
+#+LATEX_HEADER: \setCJKsansfont{Noto Serif CJK SC}
+#+LATEX_HEADER: \setCJKmonofont{Noto Sans Mono CJK SC}
+
+$0
+
+#+NAME: startup
+#+BEGIN_SRC emacs-lisp
+  (venv-workon "python3")
+  (setq-local my/org-babel-src-list '())
+
+  (dolist (list ml_org/babel-src-list)
+    (org-babel-goto-named-src-block list)
+    (org-babel-execute-src-block))
+  (outline-hide-sublevels 1)
+#+END_SRC
+
+# Local Variables:
+# org-confirm-babel-evaluate: nil
+# eval: (progn (org-babel-goto-named-src-block "startup") (org-babel-execute-src-block) (outline-hide-sublevels 1))
+# End:
+
+bibliography:/home/yydcnjjw/resources/mathematics/bibliography/references.bib
+bibliographystyle:unsrt

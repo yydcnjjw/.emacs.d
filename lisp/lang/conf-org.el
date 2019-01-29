@@ -1,4 +1,3 @@
-;; (setq org-image-actual-width (/ (display-pixel-width) 3))
 (setq org-startup-indented t)
 (if (display-graphic-p)
     (dolist (charset '(kana han symbol cjk-misc bopomofo))
@@ -6,22 +5,24 @@
                         charset
                         (font-spec :family "Noto Sans CJK SC")))
   (custom-set-faces
-   '(org-table ((t (:family "Noto Sans Mono CJK SC")))))
-  )
+   '(org-table ((t (:family "Noto Sans Mono CJK SC"))))))
+
 ;; config `org-download'
 (require-package 'org-download)
 (with-eval-after-load 'org-download
   (setq-default org-download-image-dir "./image")
   (define-key org-mode-map (kbd "s-c") 'org-download-screenshot)
+  (setq org-download-timestamp "-%Y-%m-%d-%H-%M-%S")
+
   (when (executable-find "spectacle")
-    (setq org-download-screenshot-method (format "spectacle -r -b -n -o %s" org-download-screenshot-file)))
+    (setq org-download-screenshot-method
+          (format "spectacle -r -b -n -o %s" org-download-screenshot-file)))
   (when (executable-find "wget")
     (custom-set-variables '(org-download-backend "wget \"%s\" -O \"%s\""))))
 
 (require-package 'company-math)
 (require-package 'cdlatex)
 (require-package 'auctex)
-(require-package 'org2ctex)
 (defun my/conf-org-latex ()
   (org-cdlatex-mode)
   (setq company-math-allow-latex-symbols-in-faces t)
@@ -29,16 +30,49 @@
             #'(lambda ()
                 (my/local-push-company-backend '(company-math-symbols-latex company-yasnippet))
                 (org-cdlatex-mode)))
+
+  (add-to-list 'org-preview-latex-process-alist
+               '(my-imagemagick
+                 :programs ("latex" "convert")
+                 :description "pdf > png"
+                 :message "you need to install the programs: latex and imagemagick."
+                 :use-xcolor t
+                 :image-input-type "pdf"
+                 :image-output-type "png"
+                 :image-size-adjust (1.0 . 1.0)
+                 :latex-compiler ("xelatex -interaction nonstopmode -output-directory %o %f")
+                 :image-converter
+                 ("convert -density %D -trim -antialias %f -quality 100 %O")))
+
+  (setq org-format-latex-options
+        '(:foreground "White" :background default :scale 1.4
+		      :html-foreground "Black" :html-background "Transparent"
+		      :html-scale 1.0 :matchers ("begin" "$1" "$" "$$" "\\(" "\\[")))
+  (setq org-latex-default-packages-alist
+        '(("AUTO" "inputenc"  t ("pdflatex"))
+          ("T1"   "fontenc"   t ("pdflatex"))
+          (""     "graphicx"  t)
+          (""     "grffile"   t)
+          (""     "longtable" nil)
+          (""     "wrapfig"   nil)
+          (""     "rotating"  nil)
+          ("normalem" "ulem"  t)
+          (""     "amsmath"   t)
+          (""     "textcomp"  t)
+          (""     "amssymb"   t)
+          (""     "capt-of"   nil)
+          (""     "hyperref"  nil)))
   ;; org latex preview
-  ;; (setq org-preview-latex-default-process 'imagemagick)
-  (setq org-preview-latex-default-process 'dvisvgm)
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.4))
-  (setq org-format-latex-options (plist-put org-format-latex-options :foreground "White"))
+  (setq org-preview-latex-default-process 'my-imagemagick
+        org-latex-compiler "xelatex"
+        )
+
+  (setq org-latex-pdf-process
+        '("%latex -interaction nonstopmode -output-directory %o %f"
+          "%latex -interaction nonstopmode -output-directory %o %f"
+          "%latex -interaction nonstopmode -output-directory %o %f"))
   (defmacro by-backend (&rest body)
-    `(case org-export-current-backend ,@body))
-  
-  (require 'org2ctex)
-  (org2ctex-toggle t))
+    `(case org-export-current-backend ,@body)))
 
 (defun my/conf-org-company ()
   (my/local-push-company-backend '(company-math-symbols-latex company-capf company-yasnippet))
@@ -48,7 +82,6 @@
   (require-package 'ob-ipython)
   (add-hook 'ob-ipython-mode-hook
             #'(lambda ()
-                (require 'ob-ipython)
                 (my/local-push-company-backend '(company-ob-ipython)))))
 
 (my/conf-ob-ipython)
@@ -70,16 +103,16 @@
 ;; do not complete 
 ;; (require-package 'org-plus-contrib)
 (add-hook 'org-mode-hook
-          (lambda ()
-            (setq truncate-lines nil)
-            (org-download-enable)
-            (my/conf-org-company)
-            (my/conf-org-latex)
-            (my/conf-org-src-mode)
-            ;; org man link
-            (my/org-man-link)
-            ;; (require 'org-man)
-            ))
+          #'(lambda ()
+              (setq truncate-lines nil)
+              (org-download-enable)
+              (my/conf-org-company)
+              (my/conf-org-latex)
+              (my/conf-org-src-mode)
+              ;; org man link
+              (my/org-man-link)
+              ;; (require 'org-man)
+              ))
 
 (defun my/org-man-link ()
   (org-link-set-parameters "man"

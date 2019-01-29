@@ -1,7 +1,7 @@
 (require-package 'dart-mode)
 (defun my/lsp-dart-enable ()
   (setq lsp-auto-guess-root t)
-  (my/lsp-enable))
+  (my/lsp-enable nil))
 
 (add-hook 'dart-mode-hook 'my/lsp-dart-enable)
 

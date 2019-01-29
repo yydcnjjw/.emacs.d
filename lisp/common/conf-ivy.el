@@ -1,9 +1,10 @@
 (require-package 'ivy)
 (require-package 'ivy-xref)
+(require-package 'ivy-hydra)
 (require-package 'counsel)
+
 (with-eval-after-load 'ivy
-  (setq ivy-use-virtual-buffers t)
-  (setq enable-recursive-minibuffers t)
+  (require 'ivy-hydra)
   (global-set-key (kbd "C-s") 'swiper)
   (global-set-key (kbd "C-c C-r") 'ivy-resume)
   (global-set-key (kbd "M-x") 'counsel-M-x)
@@ -19,7 +20,10 @@
   (global-set-key (kbd "C-x l") 'counsel-locate)
   (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
   (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
-  (setq xref-show-xrefs-function 'ivy-xref-show-xrefs))
+  (setq ivy-use-virtual-buffers t
+        xref-show-xrefs-function 'ivy-xref-show-xrefs
+        ivy-count-format "(%d/%d) "
+        ivy-use-selectable-prompt t))
 (add-hook 'after-init-hook 'ivy-mode)
 
 (provide 'conf-ivy)

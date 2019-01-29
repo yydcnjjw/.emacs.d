@@ -8,10 +8,7 @@
 (defun my/set-python-lsp-support()
   (when (executable-find "pyls")
     (defun my/lsp-python-enable ()
-      (setq company-transformers nil
-            company-lsp-async t
-            company-lsp-cache-candidates t)
-      (my/lsp-enable))
+      (my/lsp-enable nil))
     (add-hook 'python-mode-local-vars-hook #'my/lsp-python-enable)
     (when (eq major-mode 'python-mode)
       (my/lsp-python-enable))))

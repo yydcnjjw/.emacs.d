@@ -1,7 +1,7 @@
-(defun my/shell-company ()
-  (my/local-push-company-backend '(company-shell company-shell-env company-fish-shell)))
-(require-package 'company-shell)
-(add-hook 'sh-mode-hook 'my/shell-company)
+(defun my/lsp-shell-enable ()
+  ;; (setq-local company-lsp-cache-candidates t)
+  (my/lsp-enable nil))
+(add-hook 'sh-mode-hook 'my/lsp-shell-enable)
 (require 'aweshell)
-  
+
 (provide 'conf-shell)

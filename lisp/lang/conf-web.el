@@ -21,16 +21,21 @@
       web-mode-enable-part-face t
       web-mode-enable-comment-interpolation t)
 
-(add-hook 'web-mode-hook #'my/lsp-enable)
-(add-hook 'css-mode-hook #'my/lsp-enable)
+(defun my/lsp-web-enable ()
+;;  (setq-local company-lsp-cache-candidates t)
+  (my/lsp-enable nil))
+
+(add-hook 'web-mode-hook #'my/lsp-web-enable)
+(add-hook 'css-mode-hook #'my/lsp-web-enable)
 
 (defun my/lsp-js-enable ()
-  (my/lsp-enable)
+  ;;  (setq-local company-lsp-cache-candidates t)
+  (my/lsp-enable nil)
   (define-key lsp-ui-mode-map [remap js-find-symbol] #'lsp-ui-peek-find-definitions))
 (add-hook 'js-mode-hook #'my/lsp-js-enable)
 
 (require-package 'emmet-mode)
-(add-hook 'web-mode 'emmet-mode)
+(add-hook 'web-mode-hook 'emmet-mode)
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
 (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation
 
