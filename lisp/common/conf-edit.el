@@ -3,8 +3,9 @@
 (setq enable-local-variables :all
       enable-local-eval t)
 
-(setq shell-file-name "/bin/zsh"
-      indent-tabs-mode nil)
+(when (executable-find "zsh")
+  (setq shell-file-name "/bin/zsh"))
+(setq indent-tabs-mode nil)
 (fset 'yes-or-no-p 'y-or-n-p)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
