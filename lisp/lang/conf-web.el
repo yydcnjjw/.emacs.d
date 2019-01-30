@@ -22,15 +22,15 @@
       web-mode-enable-comment-interpolation t)
 
 (defun my/lsp-web-enable ()
-;;  (setq-local company-lsp-cache-candidates t)
-  (my/lsp-enable nil))
+ (setq-local company-lsp-cache-candidates t)
+  (my/lsp-enable))
 
 (add-hook 'web-mode-hook #'my/lsp-web-enable)
 (add-hook 'css-mode-hook #'my/lsp-web-enable)
 
 (defun my/lsp-js-enable ()
   (setq-local company-lsp-cache-candidates t)
-  (my/lsp-enable t)
+  (my/lsp-enable)
   (define-key lsp-ui-mode-map [remap js-find-symbol] #'lsp-ui-peek-find-definitions))
 (add-hook 'js-mode-hook #'my/lsp-js-enable)
 

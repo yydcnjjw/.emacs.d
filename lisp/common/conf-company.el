@@ -45,14 +45,12 @@
 (defun my/configure-lsp-imenu ()
   (lsp-enable-imenu))
 
-(defun my/lsp-enable (lsp-company)
+(defun my/lsp-enable ()
   (require 'lsp-clients)
   (my/enable-lsp-ui)
   (my/configure-lsp-imenu)
   (global-set-key (kbd "M-RET") 'lsp-execute-code-action)
-  (if lsp-company
-      (my/configure-lsp-company)
-    (my/local-push-company-backend 'company-capf))
+  (my/configure-lsp-company)
   (lsp))
 
 (provide 'conf-company)
