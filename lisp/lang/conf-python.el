@@ -8,6 +8,17 @@
 (defun my/set-python-lsp-support()
   (when (executable-find "pyls")
     (defun my/lsp-python-enable ()
+      (require 'lsp)
+      (require 'lsp-clients)
+      (lsp-register-client
+       (make-lsp-client :new-connection (lsp-stdio-connection "pyls")
+                        :major-modes '(python-mode)
+                        :priority 1
+                        :server-id 'my-pyls
+                        :library-folders-fn
+                        (lambda (_workspace)
+                          (list venv-current-dir)
+                          )))
       (my/lsp-enable nil))
     (add-hook 'python-mode-local-vars-hook #'my/lsp-python-enable)
     (when (eq major-mode 'python-mode)
@@ -36,7 +47,7 @@
       ;; (venv-initialize-interactive-shells)
       (setq venv-location "~/resources/mathematics/venv/")
       (add-hook 'venv-postactivate-hook #'my/set-python-shell-interpreter)
-      (setq-default mode-line-format (cons '(:exec venv-current-name) mode-line-format))
+      (setq mode-line-format (cons '(:exec venv-current-name) mode-line-format))
       
       (defvar-local my/venv "python3")
       (defvar-local my/python-path '(""))

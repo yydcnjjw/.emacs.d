@@ -1,24 +1,20 @@
-(setq org-startup-indented t)
-(if (display-graphic-p)
-    (dolist (charset '(kana han symbol cjk-misc bopomofo))
-      (set-fontset-font (frame-parameter nil 'font)
-                        charset
-                        (font-spec :family "Noto Sans CJK SC")))
-  (custom-set-faces
-   '(org-table ((t (:family "Noto Sans Mono CJK SC"))))))
+(defun my/conf-org-attr ()
+  (setq org-startup-indented t)
+  (set-face-attribute 'org-table nil
+                        :family "Noto Sans Mono CJK SC"))
 
 ;; config `org-download'
 (require-package 'org-download)
 (with-eval-after-load 'org-download
-  (setq-default org-download-image-dir "./image")
+  (setq org-download-image-dir "./image"
+        org-download-timestamp "-%Y-%m-%d-%H-%M-%S")
   (define-key org-mode-map (kbd "s-c") 'org-download-screenshot)
-  (setq org-download-timestamp "-%Y-%m-%d-%H-%M-%S")
 
   (when (executable-find "spectacle")
     (setq org-download-screenshot-method
           (format "spectacle -r -b -n -o %s" org-download-screenshot-file)))
   (when (executable-find "wget")
-    (custom-set-variables '(org-download-backend "wget \"%s\" -O \"%s\""))))
+    (setq org-download-backend "wget \"%s\" -O \"%s\"")))
 
 (require-package 'company-math)
 (require-package 'cdlatex)
@@ -64,8 +60,7 @@
           (""     "hyperref"  nil)))
   ;; org latex preview
   (setq org-preview-latex-default-process 'my-imagemagick
-        org-latex-compiler "xelatex"
-        )
+        org-latex-compiler "xelatex")
 
   (setq org-latex-pdf-process
         '("%latex -interaction nonstopmode -output-directory %o %f"
@@ -98,21 +93,6 @@
      (dot . t)
      (latex . t)
      (plantuml . t))))
-
-;; org complete bug
-;; do not complete 
-;; (require-package 'org-plus-contrib)
-(add-hook 'org-mode-hook
-          #'(lambda ()
-              (setq truncate-lines nil)
-              (org-download-enable)
-              (my/conf-org-company)
-              (my/conf-org-latex)
-              (my/conf-org-src-mode)
-              ;; org man link
-              (my/org-man-link)
-              ;; (require 'org-man)
-              ))
 
 (defun my/org-man-link ()
   (org-link-set-parameters "man"
@@ -160,13 +140,12 @@ PATH should be a topic that can be thrown at the man command."
        (t path)))))
 
 ;; export config
-(setq-default org-export-with-sub-superscripts '{})
+(setq org-export-with-sub-superscripts '{})
 
 ;; GTD
-(setq gtd-directory "~/workspace/GTD/")
-(setq org-todo-keywords
-      '((sequence "TODO(t!)" "NEXT(n)" "WAITTING(w)" "SOMEDAY(s)" "|" "DONE(d@/!)" "ABORT(a@/!)")))
-(setq org-default-notes-file (concat gtd-directory "todo.org"))
+(setq gtd-directory "~/workspace/GTD/"
+      org-todo-keywords '((sequence "TODO(t!)" "NEXT(n)" "WAITTING(w)" "SOMEDAY(s)" "|" "DONE(d@/!)" "ABORT(a@/!)"))
+      org-default-notes-file (concat gtd-directory "todo.org"))
 (define-key global-map "\C-cc" 'org-capture)
 (setq org-capture-templates
       '(("t" "Todo" entry (file+headline org-default-notes-file "Todos")
@@ -229,5 +208,21 @@ PATH should be a topic that can be thrown at the man command."
 (push '("b" "Brain" plain (function org-brain-goto-end)
         "* %i%?" :empty-lines 1)
       org-capture-templates)
+
+;; org complete bug
+;; do not complete 
+;; (require-package 'org-plus-contrib)
+(add-hook 'org-mode-hook
+          #'(lambda ()
+              (setq truncate-lines nil)
+              (my/conf-org-attr)
+              (org-download-enable)
+              (my/conf-org-company)
+              (my/conf-org-latex)
+              (my/conf-org-src-mode)
+              ;; org man link
+              (my/org-man-link)
+              ;; (require 'org-man)
+              ))
 
 (provide 'conf-org)

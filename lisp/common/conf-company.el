@@ -37,18 +37,19 @@
   (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
 
-(require-package 'company-lsp)
 (defun my/configure-lsp-company ()
+  (require-package 'company-lsp)
   (require 'company-lsp)
   (my/local-push-company-backend 'company-lsp))
 
+(defun my/configure-lsp-imenu ()
+  (lsp-enable-imenu))
+
 (defun my/lsp-enable (lsp-company)
-  (require 'lsp-mode)
   (require 'lsp-clients)
   (my/enable-lsp-ui)
-  (lsp-enable-imenu)
+  (my/configure-lsp-imenu)
   (global-set-key (kbd "M-RET") 'lsp-execute-code-action)
-  
   (if lsp-company
       (my/configure-lsp-company)
     (my/local-push-company-backend 'company-capf))

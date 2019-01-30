@@ -5,11 +5,9 @@
 (when support-languages
   (dolist (list support-languages)
     (require (intern (concat "conf-" list)))
-  ))
+    ))
 
-;; (require 'conf-html)
-;; (require 'conf-js)
-;; (require 'conf-java)
-;; (require 'conf-kotlin)
+;; misc
+(require-package 'csv-mode)
 
 (provide 'load-lang)

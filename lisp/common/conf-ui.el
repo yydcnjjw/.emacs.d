@@ -4,7 +4,8 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
-(setq inhibit-splash-screen 1)
+(setq inhibit-splash-screen 1
+      ring-bell-function 'ignore)
 
 (when window-system
   (setq-default cursor-type 'bar)
@@ -15,14 +16,13 @@
 (require-package 'spacemacs-theme)
 (load-theme 'spacemacs-dark t)
 
-(add-hook 'after-init-hook
-          (lambda ()
-            (add-hook 'prog-mode-hook 'linum-mode)
-            (my/add-hook-prog-and-text-mode
-             (lambda ()
-               (hl-line-mode)))))
+;; `display-line-numbers'
+(setq display-line-numbers-width-start t)
+(set-face-attribute 'line-number nil
+                    :background nil)
 
-(setq ring-bell-function 'ignore)
+(my/add-hook-prog-and-text-mode 'display-line-numbers-mode)
+(global-hl-line-mode 1)
 
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 

@@ -1,12 +1,12 @@
 (prefer-coding-system 'utf-8)
 
-(setq enable-local-variables :all)
-(setq enable-local-eval t)
+(setq enable-local-variables :all
+      enable-local-eval t)
 
-(setq shell-file-name "/bin/zsh")
+(setq shell-file-name "/bin/zsh"
+      indent-tabs-mode nil)
 (fset 'yes-or-no-p 'y-or-n-p)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-(setq-default indent-tabs-mode nil)
 
 (require-package 'hungry-delete)
 (dolist (hook '(emacs-lisp-mode-hook
@@ -14,12 +14,13 @@
                 c++-mode-hook
                 web-mode-hook
                 html-mode-hook
+                css-mode-hook
                 js-mode-hook
                 cmake-mode-hook
                 scheme-mode-hook))
   (add-hook hook #'hungry-delete-mode))
 
-;;; Modify the default function `set-mark-command' key
+;; Modify the default function `set-mark-command' key
 (global-unset-key (kbd "C-SPC"))
 (global-set-key (kbd "s-SPC") 'set-mark-command)
 
@@ -42,16 +43,16 @@
         comment-tags-lighter nil))
 (add-hook 'prog-mode-hook 'comment-tags-mode)
 
-;;; electric
+;; electric
 (setq show-paren-delay 0)
 (add-hook 'after-init-hook 'show-paren-mode)
 
-;;; pair
+;; pair
 (require-package 'paredit-everywhere)
 (add-hook 'prog-mode-hook 'paredit-everywhere-mode)
 (add-hook 'prog-mode-hook 'electric-pair-mode)
 
-;;; auto save
+;; auto save
 (setq auto-save-visited-interval 1)
 (my/add-hook-prog-and-text-mode 'auto-save-visited-mode)
 
@@ -59,29 +60,29 @@
 (global-set-key (kbd "C-:") 'avy-goto-char)
 (global-set-key (kbd "C-'") 'avy-goto-char-2)
 
-;;; conf `pyim'
+;; conf `pyim'
 (require-package 'pyim)
 (require-package 'posframe)
 (with-eval-after-load 'pyim
   (pyim-basedict-enable)
-  (setq default-input-method "pyim")
-  (setq pyim-default-scheme 'quanpin)
-  (setq pyim-page-tooltip 'posframe)
-  (setq pyim-page-length 5)
+  (setq default-input-method "pyim"
+        pyim-default-scheme 'quanpin
+        pyim-page-tooltip 'posframe
+        pyim-page-length 5)
   (global-set-key (kbd "M-f") 'pyim-forward-word)
   (global-set-key (kbd "M-b") 'pyim-backward-word))
 (require 'pyim)
 
-;;; conf `atomic-chrome'
+;; conf `atomic-chrome'
 (require-package 'atomic-chrome)
 (with-eval-after-load 'atomic-chrome
-  (setq atomic-chrome-default-major-mode 'markdown-mode)
-  (setq atomic-chrome-url-major-mode-alist
+  (setq atomic-chrome-default-major-mode 'markdown-mode
+        atomic-chrome-url-major-mode-alist
         '(("github\\.com" . gfm-mode)
           ("redmine" . textile-mode))))
 (add-hook 'after-init-hook 'atomic-chrome-start-server)
 
-;;; conf exec-path from shell
+;; conf exec-path from shell
 (require-package 'exec-path-from-shell)
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))

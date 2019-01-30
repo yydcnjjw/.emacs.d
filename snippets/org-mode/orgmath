@@ -14,7 +14,7 @@ $0
   (venv-workon "python3")
   (setq-local my/org-babel-src-list '())
 
-  (dolist (list ml_org/babel-src-list)
+  (dolist (list my/org-babel-src-list)
     (org-babel-goto-named-src-block list)
     (org-babel-execute-src-block))
   (outline-hide-sublevels 1)

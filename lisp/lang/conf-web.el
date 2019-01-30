@@ -29,8 +29,8 @@
 (add-hook 'css-mode-hook #'my/lsp-web-enable)
 
 (defun my/lsp-js-enable ()
-  ;;  (setq-local company-lsp-cache-candidates t)
-  (my/lsp-enable nil)
+  (setq-local company-lsp-cache-candidates t)
+  (my/lsp-enable t)
   (define-key lsp-ui-mode-map [remap js-find-symbol] #'lsp-ui-peek-find-definitions))
 (add-hook 'js-mode-hook #'my/lsp-js-enable)
 
