@@ -47,8 +47,7 @@
       ;; (venv-initialize-interactive-shells)
       (setq venv-location "~/resources/mathematics/venv/")
       (add-hook 'venv-postactivate-hook #'my/set-python-shell-interpreter)
-      (setq mode-line-format (cons '(:exec venv-current-name) mode-line-format))
-      
+      (setq-default mode-line-format (cons '(:exec venv-current-name) mode-line-format))
       (defvar-local my/venv "python3")
       (defvar-local my/python-path '(""))
       (defvar-local my/ld-library-path '(""))

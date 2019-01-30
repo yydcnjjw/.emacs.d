@@ -1,5 +1,13 @@
 (defconst my/en-font "hack 12")
+(defconst my/zh-font "Noto Sans CJK SC")
 (set-frame-font my/en-font)
+(when window-system
+  (dolist (charset '(kana han cjk-misc bopomofo))
+    (set-fontset-font
+     (frame-parameter nil 'font)
+     charset
+     (font-spec
+      :family my/zh-font))))
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
