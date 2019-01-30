@@ -19,7 +19,7 @@
                         (lambda (_workspace)
                           (list venv-current-dir)
                           )))
-      (my/lsp-enable t))
+      (my/lsp-enable))
     (add-hook 'python-mode-local-vars-hook #'my/lsp-python-enable)
     (when (eq major-mode 'python-mode)
       (my/lsp-python-enable))))
