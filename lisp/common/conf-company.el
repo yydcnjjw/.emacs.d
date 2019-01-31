@@ -17,10 +17,6 @@
   (make-local-variable 'company-backends)
   (push backend company-backends))
 
-(require-package 'company-quickhelp)
-(with-eval-after-load 'company
-  '(define-key company-active-map (kbd "C-c h") #'company-quickhelp-manual-begin))
-
 (require-package 'lsp-mode)
 (require-package 'lsp-ui)
 (require-package 'flycheck)

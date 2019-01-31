@@ -1,5 +1,5 @@
 (require-package 'web-mode)
-
+(require-package 'vue-mode)
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
@@ -27,6 +27,7 @@
 
 (add-hook 'web-mode-hook #'my/lsp-web-enable)
 (add-hook 'css-mode-hook #'my/lsp-web-enable)
+(add-hook 'vue-mode-hook #'my/lsp-web-enable)
 
 (defun my/lsp-js-enable ()
   (setq-local company-lsp-cache-candidates t)
