@@ -13,6 +13,7 @@
 (dolist (hook '(emacs-lisp-mode-hook
                 c-mode-hook
                 c++-mode-hook
+		sh-mode-hook
                 web-mode-hook
                 html-mode-hook
                 css-mode-hook
@@ -42,20 +43,20 @@
         comment-tags-case-sensitive t
         comment-tags-show-faces t
         comment-tags-lighter nil))
-(add-hook 'prog-mode-hook 'comment-tags-mode)
+(add-hook 'prog-mode-hook #'comment-tags-mode)
 
 ;; electric
 (setq show-paren-delay 0)
-(add-hook 'after-init-hook 'show-paren-mode)
+(add-hook 'after-init-hook #'show-paren-mode)
 
 ;; pair
 (require-package 'paredit-everywhere)
-(add-hook 'prog-mode-hook 'paredit-everywhere-mode)
-(add-hook 'prog-mode-hook 'electric-pair-mode)
+(add-hook 'prog-mode-hook #'paredit-everywhere-mode)
+(add-hook 'prog-mode-hook #'electric-pair-mode)
 
 ;; auto save
 (setq auto-save-visited-interval 1)
-(my/add-hook-prog-and-text-mode 'auto-save-visited-mode)
+(my/add-hook-prog-and-text-mode #'auto-save-visited-mode)
 
 (require-package 'avy)
 (global-set-key (kbd "C-:") 'avy-goto-char)
@@ -81,7 +82,7 @@
         atomic-chrome-url-major-mode-alist
         '(("github\\.com" . gfm-mode)
           ("redmine" . textile-mode))))
-(add-hook 'after-init-hook 'atomic-chrome-start-server)
+(add-hook 'after-init-hook #'atomic-chrome-start-server)
 
 ;; conf exec-path from shell
 (require-package 'exec-path-from-shell)
