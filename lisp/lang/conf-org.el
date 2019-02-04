@@ -86,7 +86,7 @@
 
 (defun my/conf-org-company ()
   (my/local-push-company-backend '(company-math-symbols-latex company-capf company-yasnippet))
-  (add-hook 'completion-at-point-functions 'pcomplete-completions-at-point nil t))
+  (add-hook 'completion-at-point-functions #'pcomplete-completions-at-point nil t))
 
 (defun my/conf-ob-ipython ()
   (require-package 'ob-ipython)
@@ -104,7 +104,8 @@
 (my/conf-ob-ipython)
 
 (defun my/conf-org-src-mode ()
-  (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+  (add-hook 'org-babel-after-execute-hook
+	    #'org-display-inline-images)
   (add-to-list 'org-src-lang-modes '("dot" . graphviz-dot))
   (org-babel-do-load-languages
    'org-babel-load-languages

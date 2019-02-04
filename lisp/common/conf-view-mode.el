@@ -37,6 +37,6 @@
 (defun my/add-dir-to-view-mode (dir)
   (add-to-list 'my/view-mode-file-dirs dir)
   (my/load-dir-view-mode))
-(add-hook 'after-init-hook 'my/load-dir-view-mode)
+(add-hook 'after-init-hook #'my/load-dir-view-mode)
 
 (provide 'conf-view-mode)

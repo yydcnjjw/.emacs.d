@@ -3,7 +3,7 @@
   (setq lsp-auto-guess-root t)
   (my/lsp-enable))
 
-(add-hook 'dart-mode-hook 'my/lsp-dart-enable)
+(add-hook 'dart-mode-hook #'my/lsp-dart-enable)
 
 (with-eval-after-load "projectile"
   (add-to-list 'projectile-project-root-files-bottom-up "pubspec.yaml")

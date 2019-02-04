@@ -24,6 +24,6 @@
         xref-show-xrefs-function 'ivy-xref-show-xrefs
         ivy-count-format "(%d/%d) "
         ivy-use-selectable-prompt t))
-(add-hook 'after-init-hook 'ivy-mode)
+(add-hook 'after-init-hook #'ivy-mode)
 
 (provide 'conf-ivy)

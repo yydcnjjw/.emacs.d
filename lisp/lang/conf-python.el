@@ -30,10 +30,10 @@
     (require-package 'ein)
     (setq ein:completion-backend 'ein:use-company-backend)
     (add-hook 'ein:connect-mode-hook
-              (lambda ()
-                ;; Fix ein overriding find-define key in python-mode
-                (when (eq major-mode 'python-mode)
-                  (define-key lsp-ui-mode-map [remap ein:pytools-jump-to-source-command] #'lsp-ui-peek-find-definitions))))))
+              #'(lambda ()
+                  ;; Fix ein overriding find-define key in python-mode
+                  (when (eq major-mode 'python-mode)
+                    (define-key lsp-ui-mode-map [remap ein:pytools-jump-to-source-command] #'lsp-ui-peek-find-definitions))))))
 
 (my/set-python-shell-interpreter)
 (my/set-python-lsp-support)

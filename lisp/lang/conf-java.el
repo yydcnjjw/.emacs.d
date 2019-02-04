@@ -6,7 +6,7 @@
   (my/configure-lsp-company)
   (lsp-intellij-enable))
 
-(add-hook 'java-mode-hook 'my/lsp-java-enable)
-(add-hook 'kotlin-mode-hook 'my/lsp-java-enable)
+(add-hook 'java-mode-hook #'my/lsp-java-enable)
+(add-hook 'kotlin-mode-hook #'my/lsp-java-enable)
 
 (provide 'conf-java)

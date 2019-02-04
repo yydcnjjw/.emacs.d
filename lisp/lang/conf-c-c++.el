@@ -26,10 +26,10 @@
 (dolist (hook '(c-mode-hook
                 c++-mode-hook))
   (add-hook
-   hook (lambda ()
-          (when (my/lsp-complete-p)
-            (my/lsp-ccls-enable)
-            ))))
+   hook #'(lambda ()
+            (when (my/lsp-complete-p)
+              (my/lsp-ccls-enable)
+              ))))
 
 (defun my/add-ccls-custom-index-file ()
   (if (projectile-project-p)
