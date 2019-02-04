@@ -62,17 +62,17 @@
 (global-set-key (kbd "C-'") 'avy-goto-char-2)
 
 ;; conf `pyim'
-(require-package 'pyim)
+;; (require-package 'pyim)
 (require-package 'posframe)
-(with-eval-after-load 'pyim
-  (pyim-basedict-enable)
-  (setq default-input-method "pyim"
-        pyim-default-scheme 'quanpin
-        pyim-page-tooltip 'posframe
-        pyim-page-length 5)
-  (global-set-key (kbd "M-f") 'pyim-forward-word)
-  (global-set-key (kbd "M-b") 'pyim-backward-word))
-(require 'pyim)
+;; (with-eval-after-load 'pyim
+;;   (pyim-basedict-enable)
+;;   (setq default-input-method "pyim"
+;;         pyim-default-scheme 'quanpin
+;;         pyim-page-tooltip 'posframe
+;;         pyim-page-length 5)
+;;   (global-set-key (kbd "M-f") 'pyim-forward-word)
+;;   (global-set-key (kbd "M-b") 'pyim-backward-word))
+;; (require 'pyim)
 
 ;; conf `atomic-chrome'
 (require-package 'atomic-chrome)

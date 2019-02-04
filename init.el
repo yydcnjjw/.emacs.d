@@ -5,7 +5,7 @@
 (let ((default-directory (file-name-as-directory emacs-user-conf-dir)))
   (normal-top-level-add-subdirs-to-load-path))
 
-(setenv "MAGICK_OCL_DEVICE" "OFF")
+;; (setenv "MAGICK_OCL_DEVICE" "OFF")
 ;; (profiler-start 'cpu)
 (require 'load-conf)
 ;; (profiler-report)

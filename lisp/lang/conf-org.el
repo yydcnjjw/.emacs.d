@@ -1,7 +1,22 @@
+(setq my/org-babel-load-languages
+      '((C . t)
+	(dot . t)
+	(latex . t)
+	(plantuml . t)
+	(emacs-lisp . t)
+	(python . t)))
+
 (defun my/conf-org-attr ()
   (setq org-startup-indented t)
+  ;; (dolist (face '(org-level-1
+  ;;                 org-level-2
+  ;;                 org-level-3
+  ;;                 org-level-4
+  ;;                 org-level-5))
+  ;;   (set-face-attribute face nil
+  ;; 			:height 1.0))
   (set-face-attribute 'org-table nil
-                        :family "Noto Sans Mono CJK SC"))
+                      :family "Noto Sans Mono CJK SC"))
 
 ;; config `org-download'
 (require-package 'org-download)
@@ -75,6 +90,13 @@
 
 (defun my/conf-ob-ipython ()
   (require-package 'ob-ipython)
+  (add-hook 'venv-postactivate-hook
+	    #'(lambda ()
+		(when (eq major-mode 'org-mode)
+		  (add-to-list 'my/org-babel-load-languages '(ipython . t))
+		  (org-babel-do-load-languages
+		   'org-babel-load-languages
+		   my/org-babel-load-languages))))
   (add-hook 'ob-ipython-mode-hook
             #'(lambda ()
                 (my/local-push-company-backend '(company-ob-ipython)))))
@@ -86,13 +108,7 @@
   (add-to-list 'org-src-lang-modes '("dot" . graphviz-dot))
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((emacs-lisp . t)
-     (python . t)
-     (ipython . t)
-     (C . t)
-     (dot . t)
-     (latex . t)
-     (plantuml . t))))
+   my/org-babel-load-languages))
 
 (defun my/org-man-link ()
   (org-link-set-parameters "man"
@@ -151,8 +167,7 @@ PATH should be a topic that can be thrown at the man command."
       '(("t" "Todo" entry (file+headline org-default-notes-file "Todos")
          "** TODO %?\n%a")))
 (setq org-agenda-files
-      '("~/workspace/notebooks/org/mathematics/papers.org"
-        "~/workspace/GTD/todo.org"
+      '("~/workspace/GTD/todo.org"
         "~/workspace/GTD/task.org"))
 
 (require-package 'org-ref)
@@ -212,7 +227,7 @@ PATH should be a topic that can be thrown at the man command."
 ;; org complete bug
 ;; do not complete 
 ;; (require-package 'org-plus-contrib)
-(add-hook 'org-mode-hook
+(add-hook 'org-mode-local-vars-hook
           #'(lambda ()
               (setq truncate-lines nil)
               (my/conf-org-attr)
