@@ -11,13 +11,12 @@
 (dir-locals-set-class-variables 'my/view-mode
                                 '((nil . ((eval . (my/view-mode-fun))))))
 
-(defcustom view-mode-file-dirs
+(defcustom view-mode-file-dirs nil
   ""
-  '())
+  :type 'list)
 
 (setq my/view-mode-file-dirs
       '("~/.emacs.d/elpa"
-        "~/.emacs.d/site-packages/web-lsp"
         "/usr/include"
         "/usr/local/include"
         "~/.local/lib"

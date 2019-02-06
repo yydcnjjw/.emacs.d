@@ -1,3 +1,4 @@
+(setq org-startup-indented t)
 (setq my/org-babel-load-languages
       '((C . t)
 	(dot . t)
@@ -7,7 +8,6 @@
 	(python . t)))
 
 (defun my/conf-org-attr ()
-  (setq org-startup-indented t)
   ;; (dolist (face '(org-level-1
   ;;                 org-level-2
   ;;                 org-level-3

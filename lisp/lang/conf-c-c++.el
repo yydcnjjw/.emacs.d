@@ -1,5 +1,6 @@
 (setq c-default-style "linux"
       c-basic-offset 4)
+(setq tags-table-list (list (expand-file-name "~/resources/basic/tags/SYSTAGS")))
 
 (require-package 'ccls)
 ;; c/c++/Object-c

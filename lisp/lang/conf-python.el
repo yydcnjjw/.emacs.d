@@ -39,7 +39,6 @@
 (my/set-python-lsp-support)
 (my/set-python-jupyter-support)
 
-(setq enable-python-env t)
 (if (executable-find "virtualenv")
     (progn 
       (require-package 'virtualenvwrapper)
@@ -67,10 +66,9 @@
                     (setenv "LD_LIBRARY_PATH" "")))
       (add-hook 'python-mode-local-vars-hook
                 #'(lambda ()
-                    (when (and enable-python-env my/venv)
+                    (when my/venv
                       (venv-workon my/venv)))))
   (progn
-    (message "option: require virtualenv")
-    (setq enable-python-env nil)))
+    (message "option: require virtualenv")))
 
 (provide 'conf-python)

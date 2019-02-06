@@ -34,7 +34,6 @@
           ("FIXME" . ,(list :weight 'bold :foreground "#DB3340"))
           ("BUG" . ,(list :weight 'bold :foreground "#DB3340"))
           ("HACK" . ,(list :weight 'bold :foreground "#E8B71A"))
-          ("KLUDGE" . ,(list :weight 'bold :foreground "#E8B71A"))
           ("XXX" . ,(list :weight 'bold :foreground "#F7EAC8"))
           ("INFO" . ,(list :weight 'bold :foreground "#F7EAC8"))
           ("DONE" . ,(list :weight 'bold :foreground "#1FDA9A"))))
@@ -63,17 +62,17 @@
 (global-set-key (kbd "C-'") 'avy-goto-char-2)
 
 ;; conf `pyim'
-;; (require-package 'pyim)
+(require-package 'pyim)
 (require-package 'posframe)
-;; (with-eval-after-load 'pyim
-;;   (pyim-basedict-enable)
-;;   (setq default-input-method "pyim"
-;;         pyim-default-scheme 'quanpin
-;;         pyim-page-tooltip 'posframe
-;;         pyim-page-length 5)
-;;   (global-set-key (kbd "M-f") 'pyim-forward-word)
-;;   (global-set-key (kbd "M-b") 'pyim-backward-word))
-;; (require 'pyim)
+(with-eval-after-load 'pyim
+  (pyim-basedict-enable)
+  (setq default-input-method "pyim"
+        pyim-default-scheme 'quanpin
+        pyim-page-tooltip 'posframe
+        pyim-page-length 5)
+  (global-set-key (kbd "M-f") 'pyim-forward-word)
+  (global-set-key (kbd "M-b") 'pyim-backward-word))
+(require 'pyim)
 
 ;; conf `atomic-chrome'
 (require-package 'atomic-chrome)
