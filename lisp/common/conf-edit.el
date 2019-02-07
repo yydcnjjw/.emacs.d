@@ -88,6 +88,10 @@
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
 
+;; url proxy
+(setq url-proxy-services '(("http" . "127.0.0.1:8118")
+			   ("https" . "127.0.0.1:8118")))
+
 (setq fill-column 80
       select-enable-clipboard t
       initial-scratch-message ""
