@@ -45,7 +45,7 @@
   (require 'lsp-clients)
   (my/enable-lsp-ui)
   (my/configure-lsp-imenu)
-  (global-set-key (kbd "M-RET") 'lsp-execute-code-action)
+  (global-set-key (kbd "M-RET") #'lsp-execute-code-action)
   (my/configure-lsp-company)
   (lsp))
 

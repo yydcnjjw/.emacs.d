@@ -23,7 +23,7 @@
 (with-eval-after-load 'org-download
   (setq org-download-image-dir "./image"
         org-download-timestamp "-%Y-%m-%d-%H-%M-%S")
-  (define-key org-mode-map (kbd "s-c") 'org-download-screenshot)
+  (define-key org-mode-map (kbd "s-c") #'org-download-screenshot)
 
   (when (executable-find "spectacle")
     (setq org-download-screenshot-method
@@ -163,7 +163,7 @@ PATH should be a topic that can be thrown at the man command."
 (setq gtd-directory "~/workspace/GTD/"
       org-todo-keywords '((sequence "TODO(t!)" "NEXT(n)" "WAITTING(w)" "SOMEDAY(s)" "|" "DONE(d@/!)" "ABORT(a@/!)"))
       org-default-notes-file (concat gtd-directory "todo.org"))
-(define-key global-map "\C-cc" 'org-capture)
+(define-key global-map "\C-cc" #'org-capture)
 (setq org-capture-templates
       '(("t" "Todo" entry (file+headline org-default-notes-file "Todos")
          "** TODO %?\n%a")))

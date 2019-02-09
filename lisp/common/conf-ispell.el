@@ -27,6 +27,6 @@
 (with-eval-after-load 'flyspell
   (require-package 'flyspell-correct-ivy)
   (require 'flyspell-correct-ivy)
-  (define-key flyspell-mode-map (kbd "C-;") 'flyspell-correct-wrapper))
+  (define-key flyspell-mode-map (kbd "C-;") #'flyspell-correct-wrapper))
 
 (provide 'conf-ispell)

@@ -1,14 +1,9 @@
 (require-package 'projectile)
+(require-package 'ibuffer-projectile)
 
 (when (executable-find "ag")
   (require-package 'ag))
 (require-package 'skeletor)
-
-(setq projectile-completion-system 'ivy)
-(setq projectile-enable-caching t)
-(projectile-global-mode)
-
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 (defun my/projectile-dynamic-change-index-method()
   (when (projectile-project-p)
@@ -41,4 +36,17 @@ current buffer's, reload dir-locals."
     (with-current-buffer buffer
       (reload-dir-locals-for-curent-buffer))))
 
+;; `projectile'
+(setq projectile-completion-system 'ivy)
+(setq projectile-enable-caching t)
+
+;; `ibuffer-projectile'
+(add-hook 'ibuffer-hook
+    (lambda ()
+      (ibuffer-projectile-set-filter-groups)
+      (unless (eq ibuffer-sorting-mode 'alphabetic)
+        (ibuffer-do-sort-by-alphabetic))))
+
+(projectile-global-mode)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (provide 'conf-projectile)

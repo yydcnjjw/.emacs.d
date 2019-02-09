@@ -7,7 +7,7 @@
   (setq shell-file-name "/bin/zsh"))
 (setq indent-tabs-mode nil)
 (fset 'yes-or-no-p 'y-or-n-p)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd "C-x C-b") #'ibuffer)
 
 (require-package 'hungry-delete)
 (dolist (hook '(emacs-lisp-mode-hook
@@ -24,7 +24,7 @@
 
 ;; Modify the default function `set-mark-command' key
 (global-unset-key (kbd "C-SPC"))
-(global-set-key (kbd "s-SPC") 'set-mark-command)
+(global-set-key (kbd "s-SPC") #'set-mark-command)
 
 (require-package 'comment-tags)
 (with-eval-after-load 'comment-tags
@@ -58,8 +58,8 @@
 (my/add-hook-prog-and-text-mode #'auto-save-visited-mode)
 
 (require-package 'avy)
-(global-set-key (kbd "C-:") 'avy-goto-char)
-(global-set-key (kbd "C-'") 'avy-goto-char-2)
+(global-set-key (kbd "C-:") #'avy-goto-char)
+(global-set-key (kbd "C-'") #'avy-goto-char-2)
 
 ;; conf `pyim'
 (require-package 'pyim)
@@ -70,8 +70,8 @@
         pyim-default-scheme 'quanpin
         pyim-page-tooltip 'posframe
         pyim-page-length 5)
-  (global-set-key (kbd "M-f") 'pyim-forward-word)
-  (global-set-key (kbd "M-b") 'pyim-backward-word))
+  (global-set-key (kbd "M-f") #'pyim-forward-word)
+  (global-set-key (kbd "M-b") #'pyim-backward-word))
 (require 'pyim)
 
 ;; conf `atomic-chrome'
