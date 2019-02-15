@@ -19,7 +19,10 @@
                 css-mode-hook
                 js-mode-hook
                 cmake-mode-hook
-                scheme-mode-hook))
+                scheme-mode-hook
+		web-mode-hook
+		typescript-mode-hook
+		js2-mode-hook))
   (add-hook hook #'hungry-delete-mode))
 
 ;; Modify the default function `set-mark-command' key
@@ -87,6 +90,9 @@
 (require-package 'exec-path-from-shell)
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
+
+;; ;; `eldoc'
+(setq eldoc-print-after-edit nil)
 
 ;; url proxy
 (setq url-proxy-services '(("http" . "127.0.0.1:8118")

@@ -6,16 +6,20 @@
   (define-key company-active-map (kbd "C-p") #'company-select-previous)
   (setq company-idle-delay 0.2
         company-minimum-prefix-length 1
+	company-tooltip-align-annotations t	
         company-backends '(company-files
 	                   company-keywords
                            ;; company-capf
 	                   company-abbrev
 	                   company-dabbrev)))
-(my/add-hook-prog-and-text-mode #'company-mode)
+(add-hook 'after-init-hook #'global-company-mode)
 
 (defun my/local-push-company-backend (backend)
   (make-local-variable 'company-backends)
   (push backend company-backends))
+
+(require-package 'company-quickhelp)
+(company-quickhelp-mode)
 
 (require-package 'lsp-mode)
 (require-package 'lsp-ui)
