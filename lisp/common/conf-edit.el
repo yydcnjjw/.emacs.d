@@ -9,6 +9,9 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (global-set-key (kbd "C-x C-b") #'ibuffer)
 
+;;; `flycheck'
+(setq flycheck-check-syntax-automatically '(save mode-enabled))
+
 (require-package 'hungry-delete)
 (dolist (hook '(emacs-lisp-mode-hook
                 c-mode-hook

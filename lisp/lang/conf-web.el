@@ -49,7 +49,6 @@
   (tide-setup)
   (flycheck-mode +1)
   (flycheck-pos-tip-mode)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
   (local-set-key (kbd "M-RET") #'tide-fix))
@@ -76,7 +75,7 @@
 		(when (string-equal "tsx" file-extension)
 		  (setup-tide-mode)
 		  (yas-activate-extra-mode 'typescript-mode)))))
-(with-eval-after-load 'flycheck
+(with-eval-after-load 'tide
   (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
   (flycheck-add-mode 'javascript-eslint 'rjsx-mode)
   (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append))
