@@ -1,11 +1,12 @@
-auto-save-list
-elpa
-eshell
-games
-pyim
-site-packages
-request
-url
+auto-save-list/
+elpa/
+eshell/
+games/
+pyim/
+site-packages/
+request/
+url/
+transient/
 
 tramp
 lisp/conf-custom.el
