@@ -94,10 +94,6 @@
 ;; ;; `eldoc'
 (setq eldoc-print-after-edit nil)
 
-;; url proxy
-(setq url-proxy-services '(("http" . "127.0.0.1:8118")
-			   ("https" . "127.0.0.1:8118")))
-
 (setq fill-column 80
       select-enable-clipboard t
       initial-scratch-message ""
