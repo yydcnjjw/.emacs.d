@@ -46,6 +46,7 @@
   (lsp-enable-imenu))
 
 (defun my/lsp-enable ()
+  (interactive)
   (require 'lsp-clients)
   (my/enable-lsp-ui)
   (my/configure-lsp-imenu)

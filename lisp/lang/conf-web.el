@@ -58,7 +58,7 @@
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
 (setq js-indent-level 8)
-
+(setq typescript-indent-level 8)
 (add-hook 'js-mode-hook
 	  #'(lambda ()
 	      (when (eq major-mode 'js-mode)
