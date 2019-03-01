@@ -9,7 +9,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (global-set-key (kbd "C-x C-b") #'ibuffer)
 
-;;; `flycheck'
+;; `flycheck'
 (setq flycheck-check-syntax-automatically '(save mode-enabled))
 
 (require-package 'hungry-delete)
@@ -97,8 +97,7 @@
 	      (when (memq window-system '(mac ns x))
 		(exec-path-from-shell-initialize))))
 
-
-;; ;; `eldoc'
+;; `eldoc'
 (setq eldoc-print-after-edit nil)
 
 (setq fill-column 80

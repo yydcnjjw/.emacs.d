@@ -57,8 +57,9 @@
 
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
-(setq js-indent-level 8)
-(setq typescript-indent-level 8)
+(setq js-indent-level 4
+      typescript-indent-level 4)
+
 (add-hook 'js-mode-hook
 	  #'(lambda ()
 	      (when (eq major-mode 'js-mode)
@@ -103,4 +104,21 @@
 		(if (string= web-mode-cur-language "css")
     		    (setq emmet-use-css-transform t)
       		  (setq emmet-use-css-transform nil)))))
+
+
+;; `json-mode'
+(require-package 'json-mode)
+(add-hook 'json-mode-hook
+	  #'(lambda ()
+	      (setq-local js-indent-level 2)))
+
+;; `protobuf-mode'
+(require-package 'protobuf-mode)
+(defconst my/protobuf-style
+  '((c-basic-offset . 2)
+    (indent-tabs-mode . nil)))
+(add-hook 'protobuf-mode-hook
+	  #'(lambda ()
+	      (c-add-style "protobuf-style" my/protobuf-style t)))
+
 (provide 'conf-web)

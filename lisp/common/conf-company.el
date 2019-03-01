@@ -6,11 +6,11 @@
   (define-key company-active-map (kbd "C-p") #'company-select-previous)
   (setq company-idle-delay 0.2
         company-minimum-prefix-length 1
-	company-tooltip-align-annotations t	
+	company-tooltip-align-annotations t
         company-backends '(company-files
 	                   company-keywords
-                           ;; company-capf
 	                   company-abbrev
+			   company-dabbrev-code
 	                   company-dabbrev)))
 (add-hook 'after-init-hook #'global-company-mode)
 
@@ -39,17 +39,13 @@
 
 (defun my/configure-lsp-company ()
   (require-package 'company-lsp)
-  (require 'company-lsp)
   (my/local-push-company-backend 'company-lsp))
-
-(defun my/configure-lsp-imenu ()
-  (lsp-enable-imenu))
 
 (defun my/lsp-enable ()
   (interactive)
   (require 'lsp-clients)
   (my/enable-lsp-ui)
-  (my/configure-lsp-imenu)
+  (lsp-enable-imenu)  
   (global-set-key (kbd "M-RET") #'lsp-execute-code-action)
   (my/configure-lsp-company)
   (lsp))

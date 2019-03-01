@@ -5,8 +5,7 @@
 
 (add-hook 'dart-mode-hook #'my/lsp-dart-enable)
 
-(with-eval-after-load "projectile"
-  (add-to-list 'projectile-project-root-files-bottom-up "pubspec.yaml")
-  (add-to-list 'projectile-project-root-files-bottom-up "BUILD"))
+(with-eval-after-load 'projectile
+  (projectile-register-project-type 'dart '("pubspec.yaml")))
 
 (provide 'conf-dart)

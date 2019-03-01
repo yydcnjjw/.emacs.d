@@ -37,8 +37,8 @@ current buffer's, reload dir-locals."
       (reload-dir-locals-for-curent-buffer))))
 
 ;; `projectile'
-(setq projectile-completion-system 'ivy)
-(setq projectile-enable-caching t)
+(setq projectile-completion-system 'ivy
+      projectile-enable-caching t)
 
 ;; `ibuffer-projectile'
 (add-hook 'ibuffer-hook
