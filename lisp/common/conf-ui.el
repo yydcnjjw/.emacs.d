@@ -28,8 +28,14 @@
 (set-face-attribute 'line-number nil
                     :background nil)
 (my/add-hook-prog-and-text-mode #'display-line-numbers-mode)
-(column-number-mode 1)
-(global-hl-line-mode 1)
+(column-number-mode +1)
+(global-hl-line-mode +1)
+(add-hook 'prog-mode-hook #'goto-address-prog-mode)
+(add-hook 'text-mode-hook #'goto-address-mode)
+
+;; `highlight-numbers'
+(require-package 'highlight-numbers)
+(add-hook 'prog-mode-hook 'highlight-numbers-mode)
 
 (add-hook 'shell-mode-hook #'ansi-color-for-comint-mode-on)
 

@@ -5,11 +5,13 @@
   (require-package 'ag))
 (require-package 'skeletor)
 
+(setq projectile-indexing-method 'hybrid)
+
 (defun my/projectile-dynamic-change-index-method()
   (when (projectile-project-p)
     (if (eq (projectile-project-vcs) 'none)
         (setq projectile-indexing-method 'native)
-      (setq projectile-indexing-method 'alien))))
+      (setq projectile-indexing-method 'hybrid))))
 
 (defun my/projectile-custom-switch-action()
   (my/projectile-dynamic-change-index-method)

@@ -1,4 +1,5 @@
 (setq org-startup-indented t)
+(setq org-html-htmlize-output-type 'css)
 (setq my/org-babel-load-languages
       '((C . t)
 	(dot . t)
@@ -8,13 +9,6 @@
 	(python . t)))
 
 (defun my/conf-org-attr ()
-  ;; (dolist (face '(org-level-1
-  ;;                 org-level-2
-  ;;                 org-level-3
-  ;;                 org-level-4
-  ;;                 org-level-5))
-  ;;   (set-face-attribute face nil
-  ;; 			:height 1.0))
   (set-face-attribute 'org-table nil
                       :family "Noto Sans Mono CJK SC"))
 
@@ -224,6 +218,29 @@ PATH should be a topic that can be thrown at the man command."
 (push '("b" "Brain" plain (function org-brain-goto-end)
         "* %i%?" :empty-lines 1)
       org-capture-templates)
+
+;; org ruby
+(with-eval-after-load 'org
+  (defun org-ruby-export (link description format)
+    (let ((path link)
+	  (desc description))
+      (cond
+       ((eq format 'html) (format "<ruby> %s <rp>(</rp><rt>%s</rt><rp>)</rp></ruby>" desc path))
+       ((eq format 'latex) (format "\\ruby{%s}{%s}" desc path))
+       (t path))))
+
+  (defface org-ruby-face
+    `((t (:inherit underline)))
+    "")
+  
+  (org-link-set-parameters "ruby"
+			   :follow #'(lambda (path) path)
+			   :export #'org-ruby-export
+			   :face 'org-ruby-face
+			   ;; :help-echo #'(lambda (window object position)
+			   ;; 		  ""
+			   ;; 		  )
+			   ))
 
 ;; org complete bug
 ;; do not complete 

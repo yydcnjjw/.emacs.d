@@ -14,7 +14,10 @@
 (defun my/lsp-ccls-enable ()
   (setq ccls-args '("--log-file=/tmp/ccls.log"))
   (setq ccls-initialization-options
-        '(:index (:comments 2) :completion (:detailedLabel t)))
+	'(:index (:comments 2)
+	  :completion (:detailedLabel t)
+	  :cache (:format "json")
+	  ))
   (require 'ccls)
   (my/lsp-enable))
 (defun my/lsp-complete-p ()

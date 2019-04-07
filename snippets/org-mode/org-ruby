@@ -1,0 +1,4 @@
+# key: ruby
+# name: org-ruby
+# --
+[[ruby:$1][$2]]$0

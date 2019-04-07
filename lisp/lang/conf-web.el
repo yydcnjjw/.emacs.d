@@ -7,7 +7,7 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
 
 (setq web-mode-markup-indent-offset 2
       web-mode-css-indent-offset 2
@@ -26,17 +26,15 @@
 	      (string= "css" file-extension))
       (flycheck-mode 1)
       (my/local-push-company-backend '(company-css company-web-html company-yasnippet)))))
-(add-hook 'web-mode-hook #'my/company-web-configure)
+;; (add-hook 'web-mode-hook #'my/company-web-configure)
 
 (defun my/lsp-web-enable ()
-  (setq company-lsp-cache-candidates t)
   (my/lsp-enable))
-;; (add-hook 'web-mode-hook #'my/lsp-web-enable)
-
+(add-hook 'web-mode-hook #'my/lsp-web-enable)
+(add-hook 'css-mode-hook #'my/lsp-web-enable)
 ;;; `vue-mode'
 (require-package 'vue-mode)
 (defun my/lsp-vue-enable ()
-  (setq-local company-lsp-cache-candidates t)
   (my/lsp-enable))
 (add-hook 'vue-mode-hook #'my/lsp-vue-enable)
 
@@ -86,7 +84,6 @@
 ;;; ln -s /usr/bin/npm npm
 ;; (require-package 'typescript-mode)
 ;; (defun my/lsp-js-enable ()
-;;   (setq-local company-lsp-cache-candidates t)
 ;;   (my/lsp-enable)
 ;;   (define-key lsp-ui-mode-map [remap js-find-symbol] #'lsp-ui-peek-find-definitions))
 ;; (add-hook 'js-mode-hook #'my/lsp-js-enable)
