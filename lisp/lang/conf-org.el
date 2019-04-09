@@ -1,6 +1,6 @@
-(setq org-startup-indented t)
-(setq org-html-htmlize-output-type 'css)
-(setq my/org-babel-load-languages
+(setq org-startup-indented t
+      org-html-htmlize-output-type 'css
+      my/org-babel-load-languages
       '((C . t)
 	(dot . t)
 	(latex . t)
@@ -10,7 +10,13 @@
 
 (defun my/conf-org-attr ()
   (set-face-attribute 'org-table nil
-                      :family "Noto Sans Mono CJK SC"))
+                      :family "Noto Sans Mono CJK SC")
+  (add-hook 'org-src-mode-hook
+  	    #'(lambda ()
+  		(when (and (eq major-mode 'text-mode))
+  		  ;; recognize table.el
+  		  (face-remap-add-relative 'default
+  					   '(:family "Noto Sans Mono CJK SC"))))))
 
 ;; config `org-download'
 (require-package 'org-download)
@@ -53,30 +59,11 @@
         '(:foreground "White" :background default :scale 1.4
 		      :html-foreground "Black" :html-background "Transparent"
 		      :html-scale 1.0 :matchers ("begin" "$1" "$" "$$" "\\(" "\\[")))
-  (setq org-latex-default-packages-alist
-        '(("AUTO" "inputenc"  t ("pdflatex"))
-          ("T1"   "fontenc"   t ("pdflatex"))
-          (""     "graphicx"  t)
-          (""     "grffile"   t)
-          (""     "longtable" nil)
-          (""     "wrapfig"   nil)
-          (""     "rotating"  nil)
-          ("normalem" "ulem"  t)
-          (""     "amsmath"   t)
-          (""     "textcomp"  t)
-          (""     "amssymb"   t)
-          (""     "capt-of"   nil)
-          (""     "hyperref"  nil)))
   ;; org latex preview
   (setq org-preview-latex-default-process 'my-imagemagick
-        org-latex-compiler "xelatex")
-
-  (setq org-latex-pdf-process
-        '("%latex -interaction nonstopmode -output-directory %o %f"
-          "%latex -interaction nonstopmode -output-directory %o %f"
-          "%latex -interaction nonstopmode -output-directory %o %f"))
-  (defmacro by-backend (&rest body)
-    `(case org-export-current-backend ,@body)))
+        org-latex-compiler "xelatex"
+	org-latex-pdf-process
+	'("latexmk -g -pdf -pdflatex=\"%latex\" -outdir=%o %f")))
 
 (defun my/conf-org-company ()
   (my/local-push-company-backend '(company-math-symbols-latex company-capf company-yasnippet))
@@ -163,15 +150,16 @@ PATH should be a topic that can be thrown at the man command."
          "** TODO %?\n%a")))
 (setq org-agenda-files
       '("~/workspace/GTD/todo.org"
-        "~/workspace/GTD/task.org"))
+        "~/workspace/GTD/task.org"
+	"~/workspace/notebooks/org/todo.org"))
 
 (require-package 'org-ref)
 (with-eval-after-load 'org
   (require 'org-ref))
 ;; org-ref
-(setq reftex-default-bibliography '("~/resources/mathematics/bibliography/references.bib"))
-(setq org-ref-bibliography-notes "~/workspace/notebooks/org/mathematics/papers.org"
-      org-ref-default-bibliography '("~/resources/mathematics/bibliography/references.bib")
+(setq reftex-default-bibliography '("~/workspace/notebooks/org/bibliography/references.bib"))
+(setq org-ref-bibliography-notes "~/workspace/notebooks/org/bibliography/notes.org"
+      org-ref-default-bibliography '("~/workspace/notebooks/org/bibliography/references.bib")
       org-ref-pdf-directory "~/resources/mathematics/paper/"
       org-ref-completion-library 'org-ref-ivy-cite)
 
@@ -209,15 +197,6 @@ PATH should be a topic that can be thrown at the man command."
 (with-eval-after-load 'org
   (setcdr (assoc "\\.pdf\\'" org-file-apps) "okular %s"))
 
-;; org brain
-(require-package 'org-brain)
-(setq org-brain-path "~/workspace/GTD/brain/"
-      org-id-track-globally t
-      org-brain-visualize-default-choices 'all
-      org-brain-title-max-length 12)
-(push '("b" "Brain" plain (function org-brain-goto-end)
-        "* %i%?" :empty-lines 1)
-      org-capture-templates)
 
 ;; org ruby
 (with-eval-after-load 'org
@@ -231,7 +210,7 @@ PATH should be a topic that can be thrown at the man command."
 
   (defface org-ruby-face
     `((t (:inherit underline)))
-    "")
+    "org ruby face")
   
   (org-link-set-parameters "ruby"
 			   :follow #'(lambda (path) path)
@@ -242,9 +221,11 @@ PATH should be a topic that can be thrown at the man command."
 			   ;; 		  )
 			   ))
 
-;; org complete bug
-;; do not complete 
-;; (require-package 'org-plus-contrib)
+;; table.el
+(with-eval-after-load 'org
+  (setq table-html-th-rows 1
+	table-html-th-columns 1))
+
 (add-hook 'org-mode-local-vars-hook
           #'(lambda ()
               (setq truncate-lines nil)
@@ -253,9 +234,7 @@ PATH should be a topic that can be thrown at the man command."
               (my/conf-org-company)
               (my/conf-org-latex)
               (my/conf-org-src-mode)
-              ;; org man link
               (my/org-man-link)
-              ;; (require 'org-man)
               ))
 
 (provide 'conf-org)
