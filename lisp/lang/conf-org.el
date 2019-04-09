@@ -1,4 +1,5 @@
 (setq org-startup-indented t
+      org-export-use-babel nil
       org-html-htmlize-output-type 'css
       my/org-babel-load-languages
       '((C . t)
@@ -10,13 +11,7 @@
 
 (defun my/conf-org-attr ()
   (set-face-attribute 'org-table nil
-                      :family "Noto Sans Mono CJK SC")
-  (add-hook 'org-src-mode-hook
-  	    #'(lambda ()
-  		(when (and (eq major-mode 'text-mode))
-  		  ;; recognize table.el
-  		  (face-remap-add-relative 'default
-  					   '(:family "Noto Sans Mono CJK SC"))))))
+                      :family "Noto Sans Mono CJK SC"))
 
 ;; config `org-download'
 (require-package 'org-download)
@@ -87,7 +82,7 @@
 (defun my/conf-org-src-mode ()
   (add-hook 'org-babel-after-execute-hook
 	    #'org-display-inline-images)
-  (add-to-list 'org-src-lang-modes '("dot" . graphviz-dot))
+  ;; (add-to-list 'org-src-lang-modes '("dot" . graphviz-dot))
   (org-babel-do-load-languages
    'org-babel-load-languages
    my/org-babel-load-languages))
@@ -222,9 +217,12 @@ PATH should be a topic that can be thrown at the man command."
 			   ))
 
 ;; table.el
-(with-eval-after-load 'org
-  (setq table-html-th-rows 1
-	table-html-th-columns 1))
+(add-hook 'org-src-mode-hook
+  	  #'(lambda ()
+              (when (and (eq major-mode 'text-mode))
+ 		;; recognize table.el
+  		(face-remap-add-relative 'default
+  					 '(:family "Noto Sans Mono CJK SC")))))
 
 (add-hook 'org-mode-local-vars-hook
           #'(lambda ()
