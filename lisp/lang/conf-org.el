@@ -214,7 +214,12 @@ PATH should be a topic that can be thrown at the man command."
 			   ;; :help-echo #'(lambda (window object position)
 			   ;; 		  ""
 			   ;; 		  )
-			   ))
+			   )
+  (defun org-ruby-replace ()
+    (interactive)
+    (replace-regexp )
+    ;TODO: \(.*\)(\(\)) -> [[ruby:\2][\1]]
+    ))
 
 ;; table.el
 (add-hook 'org-src-mode-hook
