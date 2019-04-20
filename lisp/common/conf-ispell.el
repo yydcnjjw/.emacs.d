@@ -6,7 +6,8 @@
  ((executable-find "hunspell")
   (setq ispell-program-name "hunspell")
   (setq ispell-local-dictionary-alist
-        '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8))))
+        '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)
+	  (""))))
  (t (setq ispell-program-name nil)))
 
 (defun flyspell-detect-ispell-args (&optional run-together)

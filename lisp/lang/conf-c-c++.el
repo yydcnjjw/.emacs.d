@@ -81,6 +81,6 @@
 (when (executable-find "cmake")
   (require-package 'cmake-mode)
   (defun my/cmake-company ()
-    (my/local-push-company-backend '(company-cmake company-yasinppet)))
+    (my/local-push-company-backend '(company-cmake company-yasnippet)))
   (add-hook 'cmake-mode-hook #'my/cmake-company))
 (provide 'conf-c-c++)
