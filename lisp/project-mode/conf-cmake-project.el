@@ -14,11 +14,12 @@
 (defun my/cmake-run-cmd()
   cmake/build-dir)
 
-(projectile-register-project-type 'cmake '("CMakeLists.txt")
-                                  :configure 'my/cmake-configure-cmd
-                                  :compile 'my/cmake-compilation-cmd
-                                  :run 'my/cmake-run-cmd
-                                  :test "ctest")
+(with-eval-after-load 'projectile
+  (projectile-register-project-type 'cmake '("CMakeLists.txt")
+                                    :configure 'my/cmake-configure-cmd
+                                    :compile 'my/cmake-compilation-cmd
+                                    :run 'my/cmake-run-cmd
+                                    :test "ctest"))
 
 (skeletor-define-template "cmake-project"
   :title "cmake-project"

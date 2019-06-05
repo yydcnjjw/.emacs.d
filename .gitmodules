@@ -7,3 +7,6 @@
 [submodule "lisp/site-packages/aweshell"]
 	path = lisp/site-packages/aweshell
 	url = https://github.com/manateelazycat/aweshell.git
+[submodule "lisp/site-packages/awesome-pair"]
+	path = lisp/site-packages/awesome-pair
+	url = https://github.com/manateelazycat/awesome-pair.git

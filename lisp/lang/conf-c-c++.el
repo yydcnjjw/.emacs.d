@@ -1,5 +1,5 @@
-(setq c-default-style "linux"
-      c-basic-offset 4)
+(setq-default c-basic-offset 4)
+
 (setq tags-table-list (list (expand-file-name "~/resources/basic/tags/SYSTAGS")))
 
 (require-package 'ccls)
@@ -42,10 +42,7 @@
           (shell-command (format "cp ~/.emacs.d/lisp/lib/template/ccls-once-file-template %s" index-file))))
     (message "not project")))
 
-
-
 (require-package 'clang-format)
-(setq clang-format-style "{BasedOnStyle: LLVM, IndentWidth: 4}")
 
 (when (executable-find "gtags")
   (require-package 'xcscope)

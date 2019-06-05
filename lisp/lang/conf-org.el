@@ -3,11 +3,12 @@
       org-html-htmlize-output-type 'css
       my/org-babel-load-languages
       '((C . t)
-	(dot . t)
-	(latex . t)
-	(plantuml . t)
-	(emacs-lisp . t)
-	(python . t)))
+	    (dot . t)
+	    (latex . t)
+	    (plantuml . t)
+	    (emacs-lisp . t)
+	    (python . t)
+        (ein . t)))
 
 (defun my/conf-org-attr ()
   (set-face-attribute 'org-table nil

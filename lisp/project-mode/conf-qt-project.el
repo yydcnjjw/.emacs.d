@@ -16,10 +16,13 @@
 (defun my/qt-run-cmd()
   qt/build-dir)
 
-(projectile-register-project-type 'qt-project #'projectile-qt-project-p
-                                  :configure 'my/qt-configure-cmd
-                                  :compile 'my/qt-compilation-cmd
-                                  :run 'my/qt-run-cmd)
+(with-eval-after-load 'projectile
+  (projectile-register-project-type 'qt-project #'projectile-qt-project-p
+                                    :configure 'my/qt-configure-cmd
+                                    :compile 'my/qt-compilation-cmd
+                                    :run 'my/qt-run-cmd))
+
+
 
 (skeletor-define-template "qt-project"
   :title "qt-project"

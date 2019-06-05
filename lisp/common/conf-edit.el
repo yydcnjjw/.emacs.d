@@ -5,7 +5,7 @@
 
 (when (executable-find "zsh")
   (setq shell-file-name "/bin/zsh"))
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 (fset 'yes-or-no-p 'y-or-n-p)
 (global-set-key (kbd "C-x C-b") #'ibuffer)
 
@@ -16,16 +16,17 @@
 (dolist (hook '(emacs-lisp-mode-hook
                 c-mode-hook
                 c++-mode-hook
-		sh-mode-hook
+                sh-mode-hook
                 web-mode-hook
                 html-mode-hook
                 css-mode-hook
                 js-mode-hook
                 cmake-mode-hook
                 scheme-mode-hook
-		web-mode-hook
-		typescript-mode-hook
-		js2-mode-hook))
+                web-mode-hook
+                typescript-mode-hook
+                js2-mode-hook
+                dart-mode-hook))
   (add-hook hook #'hungry-delete-mode))
 
 ;; Modify the default function `set-mark-command' key
@@ -39,7 +40,7 @@
         `(("TODO" . ,(list :weight 'bold :foreground "#28ABE3"))
           ("FIXME" . ,(list :weight 'bold :foreground "#DB3340"))
           ("BUG" . ,(list :weight 'bold :foreground "#DB3340"))
-	  ("NOTE" . ,(list :weight 'bold :foreground "#FFF68E"))
+          ("NOTE" . ,(list :weight 'bold :foreground "#FFF68E"))
           ("HACK" . ,(list :weight 'bold :foreground "#E8B71A"))
           ("XXX" . ,(list :weight 'bold :foreground "#F7EAC8"))
           ("INFO" . ,(list :weight 'bold :foreground "#F7EAC8"))
@@ -54,11 +55,65 @@
 ;; electric
 (setq show-paren-delay 0)
 (add-hook 'after-init-hook #'show-paren-mode)
+(add-hook 'prog-mode-hook #'electric-pair-mode)
 
 ;; pair
-(require-package 'paredit-everywhere)
-(add-hook 'prog-mode-hook #'paredit-everywhere-mode)
-(add-hook 'prog-mode-hook #'electric-pair-mode)
+(require 'awesome-pair)
+(dolist (hook (list
+               'c-mode-common-hook
+               'c-mode-hook
+               'c++-mode-hook
+               'java-mode-hook
+               'haskell-mode-hook
+               'emacs-lisp-mode-hook
+               'lisp-interaction-mode-hook
+               'lisp-mode-hook
+               'maxima-mode-hook
+               'ielm-mode-hook
+               'sh-mode-hook
+               'makefile-gmake-mode-hook
+               'php-mode-hook
+               'python-mode-hook
+               'js-mode-hook
+               'go-mode-hook
+               'qml-mode-hook
+               'jade-mode-hook
+               'css-mode-hook
+               'ruby-mode-hook
+               'coffee-mode-hook
+               'rust-mode-hook
+               'qmake-mode-hook
+               'lua-mode-hook
+               'swift-mode-hook
+               'minibuffer-inactive-mode-hook
+               ))
+  (add-hook hook '(lambda () (awesome-pair-mode 1))))
+(define-key awesome-pair-mode-map (kbd "(") 'awesome-pair-open-round)
+(define-key awesome-pair-mode-map (kbd "[") 'awesome-pair-open-bracket)
+(define-key awesome-pair-mode-map (kbd "{") 'awesome-pair-open-curly)
+(define-key awesome-pair-mode-map (kbd ")") 'awesome-pair-close-round)
+(define-key awesome-pair-mode-map (kbd "]") 'awesome-pair-close-bracket)
+(define-key awesome-pair-mode-map (kbd "}") 'awesome-pair-close-curly)
+(define-key awesome-pair-mode-map (kbd "=") 'awesome-pair-equal)
+
+(define-key awesome-pair-mode-map (kbd "%") 'awesome-pair-match-paren)
+(define-key awesome-pair-mode-map (kbd "\"") 'awesome-pair-double-quote)
+
+(define-key awesome-pair-mode-map (kbd "SPC") 'awesome-pair-space)
+
+(define-key awesome-pair-mode-map (kbd "M-o") 'awesome-pair-backward-delete)
+(define-key awesome-pair-mode-map (kbd "C-d") 'awesome-pair-forward-delete)
+(define-key awesome-pair-mode-map (kbd "C-k") 'awesome-pair-kill)
+
+(define-key awesome-pair-mode-map (kbd "M-\"") 'awesome-pair-wrap-double-quote)
+(define-key awesome-pair-mode-map (kbd "M-[") 'awesome-pair-wrap-bracket)
+(define-key awesome-pair-mode-map (kbd "M-{") 'awesome-pair-wrap-curly)
+(define-key awesome-pair-mode-map (kbd "M-(") 'awesome-pair-wrap-round)
+(define-key awesome-pair-mode-map (kbd "M-)") 'awesome-pair-unwrap)
+
+(define-key awesome-pair-mode-map (kbd "M-p") 'awesome-pair-jump-right)
+(define-key awesome-pair-mode-map (kbd "M-n") 'awesome-pair-jump-left)
+(define-key awesome-pair-mode-map (kbd "M-:") 'awesome-pair-jump-out-pair-and-newline)
 
 ;; auto save
 (setq auto-save-visited-interval 1)
@@ -94,17 +149,23 @@
 (require-package 'exec-path-from-shell)
 (require 'exec-path-from-shell)
 (add-hook 'after-init-hook
-	  #'(lambda ()
-	      (when (memq window-system '(mac ns x))
-		(exec-path-from-shell-initialize))))
+          #'(lambda ()
+              (when (memq window-system '(mac ns x))
+                (exec-path-from-shell-initialize))))
 
 ;; `eldoc'
 (setq eldoc-print-after-edit nil)
 
-(setq fill-column 80
-      select-enable-clipboard t
+;; `expand-region'
+(require-package 'expand-region)
+(require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+(setq select-enable-clipboard t
       initial-scratch-message ""
-      cursor-in-non-selected-windows t
-      tab-width 4)
+      cursor-in-non-selected-windows t)
+
+(setq-default tab-width 4
+              fill-column 80)
 
 (provide 'conf-edit)

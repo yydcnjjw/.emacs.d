@@ -14,9 +14,13 @@
   (lambda (dir)
     (skeletor-async-shell-command "npm install")))
 
-(projectile-register-project-type 'npm '("package.json")
-                                  :compile "npm install"
-                                  :test "npm test"
-                                  :run "npm start"
-                                  :test-suffix ".spec")
+
+(with-eval-after-load 'projectile
+  (projectile-register-project-type 'npm '("package.json")
+                                    :compile "npm install"
+                                    :test "npm test"
+                                    :run "npm start"
+                                    :test-suffix ".spec")  )
+
+
 (provide 'conf-js-project)

@@ -9,4 +9,7 @@
 (require 'conf-version-control)
 (require 'conf-docker)
 (require 'conf-pdf)
+(require 'conf-feed)
+(require 'conf-misc)
+
 (provide 'load-common)

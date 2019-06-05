@@ -6,15 +6,15 @@
         "basic"))
 
 (skeletor-define-template "gradle-project"
-  :title "gradle-project"
-  :requires-executables '(("gradle" . "require gradle"))
-  :after-creation
-  (lambda (dir)
-    (let ((project-type (ivy-completing-read "gradle-project-type: " gradle-project-types))
-          (dsl (if (yes-or-no-p "dsl(default kotlin)")
-                   "--dsl kotlin"
-                 "")))
-      (skeletor-async-shell-command (format "gradle init --type %s %s" project-type dsl)))))
+    :title "gradle-project"
+    :requires-executables '(("gradle" . "require gradle"))
+    :after-creation
+    (lambda (dir)
+      (let ((project-type (ivy-completing-read "gradle-project-type: " gradle-project-types))
+            (dsl (if (yes-or-no-p "dsl(default kotlin)")
+                     "--dsl kotlin"
+                   "")))
+        (skeletor-async-shell-command (format "gradle init --type %s %s" project-type dsl)))))
 
 (defun my/set-gradle-project-default-configure ()
   (interactive)
