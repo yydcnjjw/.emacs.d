@@ -5,7 +5,12 @@
 
 (with-eval-after-load 'ivy
   (require 'ivy-hydra)
-  (global-set-key (kbd "C-s") #'swiper-isearch)
+  (setq ivy-use-virtual-buffers t
+        enable-recursive-minibuffers t
+        xref-show-xrefs-function #'ivy-xref-show-xrefs
+        ivy-count-format "(%d/%d) "
+        ivy-use-selectable-prompt t)
+  (global-set-key (kbd "C-s") #'swiper)
   (global-set-key (kbd "C-c C-r") #'ivy-resume)
   (global-set-key (kbd "M-x") #'counsel-M-x)
   (global-set-key (kbd "C-x C-f") #'counsel-find-file)
@@ -19,11 +24,7 @@
   (global-set-key (kbd "C-c k") #'counsel-ag)
   (global-set-key (kbd "C-x l") #'counsel-locate)
   (global-set-key (kbd "C-S-o") #'counsel-rhythmbox)
-  (define-key minibuffer-local-map (kbd "C-r") #'counsel-minibuffer-history)
-  (setq ivy-use-virtual-buffers t
-        xref-show-xrefs-function #'ivy-xref-show-xrefs
-        ivy-count-format "(%d/%d) "
-        ivy-use-selectable-prompt t))
+  (define-key minibuffer-local-map (kbd "C-r") #'counsel-minibuffer-history))
 (add-hook 'after-init-hook #'ivy-mode)
 
 (provide 'conf-ivy)

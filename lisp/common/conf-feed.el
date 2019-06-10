@@ -7,7 +7,6 @@
   (elfeed-goodies/setup)
   (elfeed-org))
 
-
 (setq rmh-elfeed-org-files '("~/workspace/notebooks/org/elfeed.org"))
 
 (provide 'conf-feed)
