@@ -39,6 +39,7 @@
 (add-hook 'vue-mode-hook #'my/lsp-vue-enable)
 
 ;; js ts jsx
+(require-package 'typescript-mode)
 (require-package 'tide)
 (require-package 'rjsx-mode)
 (require-package 'flycheck-pos-tip)

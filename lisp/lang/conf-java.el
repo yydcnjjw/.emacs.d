@@ -9,7 +9,7 @@
 
 
 (defcustom jkls-executable
-  "/home/yydcnjjw/workspace/code/project/jkls/jkls-core/build/libs/jkls-core-1.0-SNAPSHOT-all.jar"
+  "/home/yydcnjjw/workspace/code/project/jkls/jkls-main/build/libs/jkls-main-1.0-SNAPSHOT-all.jar"
   "Install directory for jkls")
 
 (defun jkls-command ()
@@ -29,6 +29,6 @@
 		    :initialization-options '(:cacheDir "/home/yydcnjjw/.cache")))
   (my/lsp-enable))
 
-(add-hook 'java-mode-hook 'my/lsp-java-enable)
+;; (add-hook 'java-mode-hook 'my/lsp-java-enable)
 
 (provide 'conf-java)

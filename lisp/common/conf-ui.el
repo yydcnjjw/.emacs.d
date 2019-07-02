@@ -14,11 +14,11 @@
 ;; (setq face-font-rescale-alist
 ;;      '(("Noto.*" . 1.2)))
 (when window-system
-  (my/set-font '(kana han cjk-misc bopomofo symbol) my/zh-font))
+  (my/set-font '(kana han cjk-misc bopomofo symbol) my/zh-font)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1))
 
-(tool-bar-mode -1)
 (menu-bar-mode -1)
-(scroll-bar-mode -1)
 
 (setq inhibit-splash-screen 1
       ring-bell-function 'ignore)

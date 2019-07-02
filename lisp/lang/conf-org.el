@@ -149,8 +149,9 @@ PATH should be a topic that can be thrown at the man command."
         "~/workspace/GTD/task.org"
 	"~/workspace/notebooks/org/todo.org"))
 
-(require-package 'org-ref)
 (with-eval-after-load 'org
+  (require-package 'helm)
+  (require-package 'org-ref)
   (require 'org-ref))
 ;; org-ref
 (setq reftex-default-bibliography '("~/workspace/notebooks/org/bibliography/references.bib"))

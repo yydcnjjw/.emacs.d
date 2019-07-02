@@ -6,33 +6,21 @@
           python-shell-interpreter-args "--simple-prompt -i")))
 
 (defun my/set-python-lsp-support()
-  (when (executable-find "pyls")
-    (defun my/lsp-python-enable ()
-      (require 'lsp)
-      (require 'lsp-clients)
-      (lsp-register-client
-       (make-lsp-client :new-connection (lsp-stdio-connection "pyls")
-                        :major-modes '(python-mode)
-                        :priority 1
-                        :server-id 'my-pyls
-                        :library-folders-fn
-                        (lambda (_workspace)
-                          (list venv-current-dir)
-                          )))
-      (my/lsp-enable))
-    (add-hook 'python-mode-local-vars-hook #'my/lsp-python-enable)
-    (when (eq major-mode 'python-mode)
-      (my/lsp-python-enable))))
+  (defun my/lsp-python-enable ()
+    (require-package 'lsp-python-ms)
+    (require 'lsp-python-ms)
+    (my/lsp-enable))
+  (add-hook 'python-mode-local-vars-hook #'my/lsp-python-enable))
 
 (defun my/set-python-elpy-support ()
   (require-package 'elpy)
   (elpy-enable))
 
-
 (defun my/set-python-jupyter-support()
   "jupyter support"
+  (require-package 'polymode)
+  (require-package 'ein)  
   (when (executable-find "jupyter")
-    (require-package 'ein)
     (setq ein:completion-backend 'ein:use-company-backend)
     (add-hook 'ein:connect-mode-hook
               #'(lambda ()
@@ -57,7 +45,6 @@
                   (dolist (path my/ld-library-path)
                     (my/append-env-value "LD_LIBRARY_PATH" path))
                   (my/set-python-shell-interpreter)
-		          (my/set-python-elpy-support)
                   (my/set-python-jupyter-support)))
 
     (add-hook 'venv-postdeactivate-hook
@@ -73,7 +60,7 @@
 
 (my/set-python-shell-interpreter)
 (my/set-python-lsp-support)
-(my/set-python-elpy-support)
+;; (my/set-python-elpy-support)
 (my/set-python-jupyter-support)
 (my/set-python-venv-support)
 
