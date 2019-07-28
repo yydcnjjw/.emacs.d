@@ -10,3 +10,9 @@
 [submodule "lisp/site-packages/awesome-pair"]
 	path = lisp/site-packages/awesome-pair
 	url = https://github.com/manateelazycat/awesome-pair.git
+[submodule "lisp/site-packages/flex"]
+	path = lisp/site-packages/flex
+	url = https://github.com/manateelazycat/flex.git
+[submodule "lisp/site-packages/bison"]
+	path = lisp/site-packages/bison
+	url = https://github.com/manateelazycat/bison.git
