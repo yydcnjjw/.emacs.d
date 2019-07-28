@@ -31,4 +31,15 @@
 
 ;; (add-hook 'java-mode-hook 'my/lsp-java-enable)
 
+
+(require-package 'lsp-java)
+(require 'lsp-java)
+(require 'lsp-java-boot)
+
+(add-hook 'java-mode-hook
+          #'(lambda ()
+              (my/lsp-enable)
+              (lsp-lens-mode)
+              (lsp-java-boot-lens-mode)))
+
 (provide 'conf-java)

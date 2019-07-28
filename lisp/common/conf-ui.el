@@ -40,13 +40,19 @@
 (add-hook 'prog-mode-hook #'goto-address-prog-mode)
 (add-hook 'text-mode-hook #'goto-address-mode)
 
+(add-hook 'shell-mode-hook #'ansi-color-for-comint-mode-on)
+
 ;; `highlight-numbers'
 (require-package 'highlight-numbers)
 (add-hook 'prog-mode-hook 'highlight-numbers-mode)
 
-(add-hook 'shell-mode-hook #'ansi-color-for-comint-mode-on)
-
 ;; Cancel automatic generation of backup files
 (setq make-backup-files nil)
+
+;; treemacs
+(require-package 'treemacs)
+(require-package 'treemacs-magit)
+(require-package 'treemacs-projectile)
+
 
 (provide 'conf-ui)

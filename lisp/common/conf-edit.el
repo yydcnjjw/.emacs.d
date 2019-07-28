@@ -27,7 +27,8 @@
                 web-mode-hook
                 typescript-mode-hook
                 js2-mode-hook
-                dart-mode-hook))
+                dart-mode-hook
+                java-mode-hook))
   (add-hook hook #'hungry-delete-mode))
 
 ;; Modify the default function `set-mark-command' key
@@ -159,7 +160,7 @@
 ;; `expand-region'
 (require-package 'expand-region)
 (require 'expand-region)
-(global-set-key (kbd "C-=") 'er/expand-region)
+(global-set-key (kbd "C-M-w") 'er/expand-region)
 
 (setq select-enable-clipboard t
       initial-scratch-message ""
