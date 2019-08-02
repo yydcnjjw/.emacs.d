@@ -11,11 +11,11 @@
 ;; elpa `google-translate' `chinese-word-at-ponit'
 
 (setq google-translate-base-url
-      "http://translate.google.cn/translate_a/single")
+      "https://translate.google.cn/translate_a/single")
 (setq google-translate-listen-url
-      "http://translate.google.cn/translate_tts")
+      "https://translate.google.cn/translate_tts")
 (setq google-translate--tkk-url
-      "http://translate.google.cn")
+      "https://translate.google.cn")
 
 (defun google-translate-chinese--region-or-word ()
   (if (use-region-p)

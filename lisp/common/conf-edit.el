@@ -12,25 +12,6 @@
 ;; `flycheck'
 (setq flycheck-check-syntax-automatically '(save mode-enabled))
 
-(require-package 'hungry-delete)
-(dolist (hook '(emacs-lisp-mode-hook
-                c-mode-hook
-                c++-mode-hook
-                sh-mode-hook
-                web-mode-hook
-                html-mode-hook
-                css-mode-hook
-                js-mode-hook
-                cmake-mode-hook
-                lisp-mode-hook
-                scheme-mode-hook
-                web-mode-hook
-                typescript-mode-hook
-                js2-mode-hook
-                dart-mode-hook
-                java-mode-hook))
-  (add-hook hook #'hungry-delete-mode))
-
 ;; Modify the default function `set-mark-command' key
 (global-unset-key (kbd "C-SPC"))
 (global-set-key (kbd "s-SPC") #'set-mark-command)
@@ -62,10 +43,6 @@
 ;; pair
 (require 'awesome-pair)
 (dolist (hook (list
-               'c-mode-common-hook
-               'c-mode-hook
-               'c++-mode-hook
-               'java-mode-hook
                'haskell-mode-hook
                'emacs-lisp-mode-hook
                'lisp-interaction-mode-hook

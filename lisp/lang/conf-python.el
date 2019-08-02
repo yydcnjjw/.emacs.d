@@ -19,7 +19,7 @@
 (defun my/set-python-jupyter-support()
   "jupyter support"
   (require-package 'polymode)
-  (require-package 'ein)  
+  (require-package 'ein)
   (when (executable-find "jupyter")
     (setq ein:completion-backend 'ein:use-company-backend)
     (add-hook 'ein:connect-mode-hook
