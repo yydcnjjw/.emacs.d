@@ -16,6 +16,3 @@
 [submodule "lisp/site-packages/bison"]
 	path = lisp/site-packages/bison
 	url = https://github.com/manateelazycat/bison.git
-[submodule "lisp/site-packages/snails"]
-	path = lisp/site-packages/snails
-	url = https://github.com/manateelazycat/snails.git

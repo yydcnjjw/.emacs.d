@@ -10,6 +10,7 @@
 (require 'conf-docker)
 (require 'conf-pdf)
 (require 'conf-feed)
+(require 'conf-mail)
 (require 'conf-misc)
 
 (provide 'load-common)
