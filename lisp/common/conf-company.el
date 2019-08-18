@@ -13,7 +13,7 @@
                            company-abbrev
                            company-dabbrev-code
                            company-dabbrev)))
-(add-hook 'after-init-hook #'global-company-mode)
+(global-company-mode 1)
 
 (defun my/local-push-company-backend (backend)
   (make-local-variable 'company-backends)

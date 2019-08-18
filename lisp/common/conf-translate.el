@@ -7,15 +7,10 @@
 (require 'google-translate)
 (require 'google-translate-smooth-ui)
 
+(setq google-translate-backend-method 'curl)
+
 ;; depend jieba
 ;; elpa `google-translate' `chinese-word-at-ponit'
-
-(setq google-translate-base-url
-      "https://translate.google.cn/translate_a/single")
-(setq google-translate-listen-url
-      "https://translate.google.cn/translate_tts")
-(setq google-translate--tkk-url
-      "https://translate.google.cn")
 
 (defun google-translate-chinese--region-or-word ()
   (if (use-region-p)

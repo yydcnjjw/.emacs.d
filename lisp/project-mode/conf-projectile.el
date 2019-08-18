@@ -48,11 +48,8 @@ current buffer's, reload dir-locals."
       (ibuffer-projectile-set-filter-groups)
       (unless (eq ibuffer-sorting-mode 'alphabetic)
         (ibuffer-do-sort-by-alphabetic))))
-
-(add-hook 'after-init-hook
-          #'(lambda ()
-              (projectile-global-mode)
-              (define-key projectile-mode-map (kbd "C-c p")
-                'projectile-command-map)))
+(projectile-global-mode)
+(define-key projectile-mode-map (kbd "C-c p")
+                'projectile-command-map)
 
 (provide 'conf-projectile)

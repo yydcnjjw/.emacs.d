@@ -37,7 +37,7 @@
 
 ;; electric
 (setq show-paren-delay 0)
-(add-hook 'after-init-hook #'show-paren-mode)
+(show-paren-mode 1)
 (add-hook 'prog-mode-hook #'electric-pair-mode)
 
 ;; pair
@@ -104,15 +104,15 @@
 ;; conf `pyim'
 (require-package 'pyim)
 (require-package 'posframe)
-(with-eval-after-load 'pyim
-  (pyim-basedict-enable)
-  (setq default-input-method "pyim"
-        pyim-default-scheme 'quanpin
-        pyim-page-tooltip 'posframe
-        pyim-page-length 5)
-  (global-set-key (kbd "M-f") #'pyim-forward-word)
-  (global-set-key (kbd "M-b") #'pyim-backward-word))
 (require 'pyim)
+(require 'pyim-basedict)
+(pyim-basedict-enable)
+(setq default-input-method "pyim"
+      pyim-default-scheme 'quanpin
+      pyim-page-tooltip 'posframe
+      pyim-page-length 5)
+(global-set-key (kbd "M-f") #'pyim-forward-word)
+(global-set-key (kbd "M-b") #'pyim-backward-word)
 
 ;; conf `atomic-chrome'
 (require-package 'atomic-chrome)
@@ -121,15 +121,13 @@
         atomic-chrome-url-major-mode-alist
         '(("github\\.com" . gfm-mode)
           ("redmine" . textile-mode))))
-(add-hook 'after-init-hook #'atomic-chrome-start-server)
+;; (add-hook 'after-init-hook #'atomic-chrome-start-server)
 
 ;; conf exec-path from shell
 (require-package 'exec-path-from-shell)
 (require 'exec-path-from-shell)
-(add-hook 'after-init-hook
-          #'(lambda ()
-              (when (memq window-system '(mac ns x))
-                (exec-path-from-shell-initialize))))
+(when (memq window-system '(mac ns x))
+                (exec-path-from-shell-initialize))
 
 ;; `eldoc'
 (setq eldoc-print-after-edit nil)
