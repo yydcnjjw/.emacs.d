@@ -7,7 +7,11 @@
 (require 'google-translate)
 (require 'google-translate-smooth-ui)
 
-(setq google-translate-backend-method 'curl)
+(setq
+ google-translate-base-url "http://translate.google.cn/translate_a/single"
+ google-translate-listen-url "http://translate.google.cn/translate_tts"
+ google-translate--tkk-url "http://translate.google.cn/"
+ google-translate-backend-method 'curl)
 
 ;; depend jieba
 ;; elpa `google-translate' `chinese-word-at-ponit'
@@ -119,19 +123,6 @@
       (insert-translated-name-insert "")
       )))
 
-(defun google-translate-chinese-open-word-with-web ()
-  (interactive)
-  (let ((word (google-translate-chinese--region-or-word))
-        from to)
-    (if (not word)
-        (message "No word found")
-      (if (chinese-word-cjk-string-p word)
-          (setq from "zh-CN" to "en")
-        (setq from "en" to "zh-Cn"))
-      (browse-url (concat "https://translate.google.cn/#"
-                          from "/" to "/"
-                          (url-hexify-string word))))))
-
 (defun google-translate-chinese-search-and-replace ()
   "Search word at point and replace with selected result."
   (interactive)
@@ -147,7 +138,7 @@
 
 (require 'insert-translated-name)
 (require 'company-english-helper)
-(global-set-key (kbd "C-c C") #'google-translate-chinese-search-at-point-and-replace)
+(global-set-key (kbd "C-c C") #'google-translate-chinese-at-point)
 (global-set-key (kbd "C-c M-c") #'toggle-company-english-helper)
 (dolist (hook (list
                'org-mode-hook

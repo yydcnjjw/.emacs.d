@@ -19,6 +19,11 @@
                  :cache (:format "json")
                  ))
   (require 'ccls)
+  (dolist (ignored-file
+           '("build"
+             "debug"
+             ".ccls-cache"))
+    (add-to-list 'lsp-file-watch-ignored ignored-file))
   (my/lsp-enable))
 
 (defun my/add-ccls-custom-index-file ()
@@ -41,11 +46,11 @@
             (GTAGSLIBPATH "GTAGSLIBPATH"))
         (if use-system
             (progn
-              (setq gtags-lib-path '("/usr/include/"))
-              (setenv MAKEOBJDIRPREFIX (file-truename "/home/yydcnjjw/resources/basic/tags"))
-              (dolist (dir gtags-lib-path)
-                (my/append-env-value "GTAGSLIBPATH"
-                                     dir)))
+              (let ((gtags-lib-path '("/usr/include/")))
+                (setenv MAKEOBJDIRPREFIX (file-truename "/home/yydcnjjw/resources/basic/tags"))
+                (dolist (dir gtags-lib-path)
+                  (my/append-env-value "GTAGSLIBPATH"
+                                       dir))))
           (progn
             (setenv MAKEOBJDIRPREFIX "")
             (setenv GTAGSLIBPATH ""))))
@@ -80,12 +85,8 @@
                 c++-mode-hook))
   (add-hook
    hook #'(lambda ()
-            (if (my/lsp-complete-p)
-                (my/lsp-ccls-enable)
-              (progn
-                (cscope-setup)
-                (tag-complete-enable-no-system)
-                (add-hook 'dired-mode-hook (function cscope-minor-mode)))))))
+            (when (my/lsp-complete-p)
+              (my/lsp-ccls-enable)))))
 
 
 (defun c-c++-org-src-complete ()
@@ -96,6 +97,6 @@
 (when (executable-find "cmake")
   (require-package 'cmake-mode)
   (defun my/cmake-company ()
-    (my/local-push-company-backend '(company-cmake company-yasnippet)))
+    (my/local-push-company-backend '(company-cmake company-yasnippet company-dabbrev-code)))
   (add-hook 'cmake-mode-hook #'my/cmake-company))
 (provide 'conf-c-c++)

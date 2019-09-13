@@ -11,6 +11,7 @@
 /eclipse.jdt.ls/
 /workspace/
 /.cache/
+/.cask/
 
 tramp
 lisp/conf-custom.el

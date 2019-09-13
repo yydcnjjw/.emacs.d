@@ -28,7 +28,8 @@
 
 ;; disable flymake at lsp-mode
 (setq lsp-prefer-flymake nil
-      lsp-auto-configure nil)
+      lsp-auto-configure nil
+      lsp-enable-file-watchers nil)
 
 (defun my/enable-lsp-ui()
   (lsp-ui-mode 1)
