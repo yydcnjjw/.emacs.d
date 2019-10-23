@@ -26,10 +26,6 @@
 (require-package 'lsp-ui)
 (require-package 'flycheck)
 
-;; disable flymake at lsp-mode
-(setq lsp-prefer-flymake nil
-      lsp-auto-configure nil
-      lsp-enable-file-watchers nil)
 
 (defun my/enable-lsp-ui()
   (lsp-ui-mode 1)
@@ -43,9 +39,16 @@
   (require-package 'company-lsp)
   (my/local-push-company-backend 'company-lsp))
 
+(defun my/lsp-configuration()
+  ;; disable flymake at lsp-mode
+  (setq lsp-prefer-flymake nil
+        lsp-auto-configure nil
+        lsp-file-watch-threshold 2000))
+
 (defun my/lsp-enable ()
   (interactive)
   (require 'lsp-clients)
+  (my/lsp-configuration)
   (global-set-key (kbd "M-RET") #'lsp-execute-code-action)
   (lsp)
   (my/enable-lsp-ui)

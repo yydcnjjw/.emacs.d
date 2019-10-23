@@ -31,7 +31,7 @@
 (defun my/set-python-venv-support ()
   (when (executable-find "virtualenv")
     (require-package 'virtualenvwrapper)
-    (setq venv-location "~/resources/mathematics/venv/")
+    (setq venv-location "~/resources/env/py-env")
     (add-hook 'venv-postactivate-hook #'my/set-python-shell-interpreter)
     (setq-default mode-line-format (cons '(:exec venv-current-name) mode-line-format))
 

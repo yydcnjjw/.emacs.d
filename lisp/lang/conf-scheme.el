@@ -1,5 +1,6 @@
 (require-package 'geiser)
-(setq geiser-active-implementations '(chez racket)
-      geiser-chez-binary "chez-scheme")
+(setq geiser-active-implementations '(chez guile)
+      geiser-chez-binary "scheme"
+      geiser-guile-binary "guile")
 
 (provide 'conf-scheme)

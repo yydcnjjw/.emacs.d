@@ -62,7 +62,7 @@
 	'("latexmk -g -pdf -pdflatex=\"%latex\" -outdir=%o %f")))
 
 (defun my/conf-org-company ()
-  (my/local-push-company-backend '(company-math-symbols-latex company-capf company-yasnippet))
+  (my/local-push-company-backend '(company-math-symbols-latex company-capf company-yasnippet company-dabbrev))
   (add-hook 'completion-at-point-functions #'pcomplete-completions-at-point nil t))
 
 (defun my/conf-ob-ipython ()

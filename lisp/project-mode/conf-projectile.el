@@ -5,7 +5,24 @@
   (require-package 'ag))
 (require-package 'skeletor)
 
-(setq projectile-indexing-method 'hybrid)
+(setq projectile-indexing-method 'hybrid
+      projectile-ignored-project-function #'my/projectile-ignored-project-function)
+
+(defcustom find-project-ignore-dir
+  '("/usr")
+  ""
+  :type 'list)
+
+(defun my/projectile-ignored-project-function(project-root)
+  (member t (mapcar
+             #'(lambda (dir)
+                 (string-prefix-p dir project-root)
+                 )
+             find-project-ignore-dir
+             )))
+
+
+(my/projectile-ignored-project-function "/usr/bin")
 
 (defun my/projectile-dynamic-change-index-method()
   (when (projectile-project-p)

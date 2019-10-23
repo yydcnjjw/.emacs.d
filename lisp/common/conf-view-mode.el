@@ -1,12 +1,11 @@
 (defun my/view-mode-fun ()
   (when buffer-file-name
-    (unless (file-writable-p buffer-file-name)
-      (my/disable-minor-modes '(company-mode
-                                flycheck-mode
-                                yas-minor-mode
-                                hungry-delete-mode
-                                flyspell-mode
-                                semantic-mode)))
+    ;; (unless (file-writable-p buffer-file-name)
+    ;;   (my/disable-minor-modes '(company-mode
+    ;;                             flycheck-mode
+    ;;                             yas-minor-mode
+    ;;                             flyspell-mode
+    ;;                             semantic-mode)))
     (view-mode-enter nil #'kill-buffer)))
 (dir-locals-set-class-variables 'my/view-mode
                                 '((nil . ((eval . (my/view-mode-fun))))))
