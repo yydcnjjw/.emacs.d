@@ -16,16 +16,14 @@
 (when window-system
   (my/set-font '(kana han cjk-misc bopomofo symbol) my/zh-font)
   (tool-bar-mode -1)
-  (scroll-bar-mode -1))
+  (scroll-bar-mode -1)
+  (setq-default cursor-type 'bar)
+  (setq frame-resize-pixelwise t))
 
 (menu-bar-mode -1)
 
 (setq inhibit-splash-screen 1
       ring-bell-function 'ignore)
-
-(when window-system
-  (setq-default cursor-type 'bar)
-  (setq frame-resize-pixelwise t))
 
 (require-package 'spacemacs-theme)
 (load-theme 'spacemacs-dark t)

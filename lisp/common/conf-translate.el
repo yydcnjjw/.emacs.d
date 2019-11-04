@@ -40,7 +40,7 @@
      (google-translate-request "en" "zh-CN" word))))
 
 (defun google-translate-chinese-concat-array-as-string (v)
-  "Concat strings in v to a whole string."
+  "Concat strings in V to a whole string."
   (let ((index 0) (str ""))
     (while (< index (length v))
       (setq str (concat str (elt v index) ", "))

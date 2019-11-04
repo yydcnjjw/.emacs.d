@@ -12,10 +12,6 @@
 ;; `flycheck'
 (setq flycheck-check-syntax-automatically '(save mode-enabled))
 
-;; Modify the default function `set-mark-command' key
-(global-unset-key (kbd "C-SPC"))
-(global-set-key (kbd "s-SPC") #'set-mark-command)
-
 (require-package 'comment-tags)
 (with-eval-after-load 'comment-tags
   (setq comment-tags-keymap-prefix (kbd "C-c t"))
@@ -99,6 +95,7 @@
 (setq auto-save-visited-interval 1)
 (my/add-hook-prog-and-text-mode #'auto-save-visited-mode)
 
+;; `avy'
 (require-package 'avy)
 (global-set-key (kbd "C-:") #'avy-goto-char)
 (global-set-key (kbd "C-'") #'avy-goto-char-2)
@@ -139,6 +136,7 @@
 (require 'expand-region)
 (global-set-key (kbd "C-M-w") 'er/expand-region)
 
+;; misc
 (setq select-enable-clipboard t
       initial-scratch-message ""
       cursor-in-non-selected-windows t)
