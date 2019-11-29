@@ -12,6 +12,7 @@
 /workspace/
 /.cache/
 /.cask/
+/persist/
 
 tramp
 lisp/conf-custom.el

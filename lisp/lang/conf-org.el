@@ -138,9 +138,11 @@ PATH should be a topic that can be thrown at the man command."
 
 ;; GTD
 (setq gtd-directory "~/workspace/GTD/"
-      org-todo-keywords '((sequence "TODO(t!)" "NEXT(n)" "WAITTING(w)" "SOMEDAY(s)" "|" "DONE(d@/!)" "ABORT(a@/!)"))
+      org-todo-keywords '((sequence "TODO(t!)" "|" "DONE(d!)")
+                          (sequence "FIXME(f!)" "|" "ABORT(a@/!)"))
       org-default-notes-file (concat gtd-directory "todo.org"))
 (define-key global-map "\C-cc" #'org-capture)
+(define-key global-map "\C-ca" #'org-agenda)
 (setq org-capture-templates
       '(("t" "Todo" entry (file+headline org-default-notes-file "Todos")
          "** TODO %?\n%a")))
@@ -219,7 +221,7 @@ PATH should be a topic that can be thrown at the man command."
 			   )
   (defun org-ruby-replace ()
     (interactive)
-    (replace-regexp )
+    (replace-regexp)
     ;TODO: \(.*\)(\(\)) -> [[ruby:\2][\1]]
     ))
 
@@ -229,17 +231,25 @@ PATH should be a topic that can be thrown at the man command."
               (when (and (eq major-mode 'text-mode))
  		;; recognize table.el
   		(face-remap-add-relative 'default
-  					 '(:family "Noto Sans Mono CJK SC")))))
+  					             '(:family "Noto Sans Mono CJK SC")))))
+
+(defun my/conf-org ()
+  (setq truncate-lines nil))
+
+(defun my/conf-org-drill ()
+  (require-package 'org-drill)
+  (require 'org-drill))
 
 (add-hook 'org-mode-local-vars-hook
           #'(lambda ()
-              (setq truncate-lines nil)
+              (my/conf-org)
               (my/conf-org-attr)
               (org-download-enable)
               (my/conf-org-company)
               (my/conf-org-latex)
               (my/conf-org-src-mode)
               (my/org-man-link)
+              (my/conf-org-drill)
               ))
 
 (provide 'conf-org)

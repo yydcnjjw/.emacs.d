@@ -26,33 +26,25 @@
 (require-package 'lsp-ui)
 (require-package 'flycheck)
 
-
 (defun my/enable-lsp-ui()
-  (lsp-ui-mode 1)
-  (require 'lsp-ui-flycheck)
-  (lsp-ui-flycheck-enable t)
-  (flycheck-mode 1)
-  (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references))
+  (with-eval-after-load 'lsp-ui-mode
+    (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)))
 
-(defun my/configure-lsp-company ()
-  (require-package 'company-lsp)
-  (my/local-push-company-backend 'company-lsp))
+(require-package 'company-lsp)
 
 (defun my/lsp-configuration()
   ;; disable flymake at lsp-mode
   (setq lsp-prefer-flymake nil
-        lsp-auto-configure nil
-        lsp-file-watch-threshold 2000))
+        lsp-file-watch-threshold 2000)
+  (global-set-key (kbd "M-RET") #'lsp-execute-code-action)
+  (my/enable-lsp-ui)  )
 
 (defun my/lsp-enable ()
+  ;; `my/lsp-enable'.
   (interactive)
-  (require 'lsp-clients)
   (my/lsp-configuration)
-  (global-set-key (kbd "M-RET") #'lsp-execute-code-action)
-  (lsp)
-  (my/enable-lsp-ui)
-  (my/configure-lsp-company))
+  (lsp))
 
 (defalias 'lsp--cur-line-diagnotics 'lsp--cur-line-diagnostics)
 
