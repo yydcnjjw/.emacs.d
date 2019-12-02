@@ -1,5 +1,5 @@
 (require-package 'geiser)
-(setq geiser-active-implementations '(chez guile)
+(setq geiser-active-implementations '(guile)
       geiser-chez-binary "scheme"
       geiser-guile-binary "guile")
 
