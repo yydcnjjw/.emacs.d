@@ -4,8 +4,9 @@
 # --
 
 #+name: $1
-#+header: :file (by-backend (latex "$2.tikz") (t "$3.png"))
-#+begin_src latex :results raw graphics
+#+header: :file (by-backend (html "$1.svg") (t 'nil))
+#+header: :results (by-backend (pdf "latex") (html "raw file") (t "raw"))
+#+begin_src latex
   \begin{tikzpicture}
     $0
   \end{tikzpicture}

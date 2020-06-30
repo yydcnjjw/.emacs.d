@@ -19,7 +19,7 @@
     ))
 
 (defun my/lsp-java-enable ()
-  (require 'lsp)
+  (require 'lsp-mode)
   (require 'lsp-clients)
   (lsp-register-client
    (make-lsp-client :new-connection (lsp-stdio-connection 'jkls-command)

@@ -4,12 +4,14 @@
 # --
 ** TODO `(format-time-string "[%Y-%m-%d %a]" (time-add (current-time) (* 60 60 24)))` :day:
 *** TODO $1
-`(format-time-string "<%Y-%m-%d %a 06:00>--<%Y-%m-%d %a 08:00>" (time-add (current-time) (* 60 60 24)))`
-*** TODO work
-`(format-time-string "<%Y-%m-%d %a 09:00>--<%Y-%m-%d %a 18:00>" (time-add (current-time) (* 60 60 24)))`
+`(format-time-string "<%Y-%m-%d %a 08:00>--<%Y-%m-%d %a 10:00>" (time-add (current-time) (* 60 60 24)))`
 *** TODO $2
-`(format-time-string "<%Y-%m-%d %a 19:00>--<%Y-%m-%d %a 21:00>" (time-add (current-time) (* 60 60 24)))`
+`(format-time-string "<%Y-%m-%d %a 10:00>--<%Y-%m-%d %a 12:00>" (time-add (current-time) (* 60 60 24)))`
 *** TODO $3
+`(format-time-string "<%Y-%m-%d %a 14:00>--<%Y-%m-%d %a 18:00>" (time-add (current-time) (* 60 60 24)))`
+*** TODO $4
+`(format-time-string "<%Y-%m-%d %a 19:00>--<%Y-%m-%d %a 21:00>" (time-add (current-time) (* 60 60 24)))`
+*** TODO $5
 `(format-time-string "<%Y-%m-%d %a 21:00>--<%Y-%m-%d %a 23:00>" (time-add (current-time) (* 60 60 24)))`
 $0
  

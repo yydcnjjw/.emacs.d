@@ -58,8 +58,15 @@
   ;; org latex preview
   (setq org-preview-latex-default-process 'my-imagemagick
         org-latex-compiler "xelatex"
-	org-latex-pdf-process
-	'("latexmk -g -pdf -pdflatex=\"%latex\" -outdir=%o %f")))
+        org-latex-pdf-process
+        '("latexmk -g -pdf -pdflatex=\"%latex -shell-escape\" -outdir=%o %f")
+        ))
+
+(defun org-export-latex-no-toc (depth)
+    (when depth
+      (format "%% Org-mode is exporting headings to %s levels.\n"
+              depth)))
+  (setq org-export-latex-format-toc-function 'org-export-latex-no-toc)
 
 (defun my/conf-org-company ()
   (my/local-push-company-backend '(company-math-symbols-latex company-capf company-yasnippet company-dabbrev))

@@ -4,6 +4,4 @@
 # --
 
 #+LATEX_HEADER: \usepackage{tikz}
-#+PROPERTY: header-args:latex+ :packages '(("" "tikz"))
-#+PROPERTY: header-args:latex+ :imagemagick yes :fit yes
 $0

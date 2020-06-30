@@ -1,4 +1,7 @@
 (prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
 
 (setq enable-local-variables :all
       enable-local-eval t)
@@ -136,6 +139,8 @@
 (require 'expand-region)
 (global-set-key (kbd "C-M-w") 'er/expand-region)
 
+;; paredit
+(require-package 'paredit)
 ;; misc
 (setq select-enable-clipboard t
       initial-scratch-message ""

@@ -4,11 +4,13 @@
 # --
 ** TODO `(format-time-string "[%Y-%m-%d %a]")` :day:
 *** TODO $1
-`(format-time-string "<%Y-%m-%d %a 06:00>--<%Y-%m-%d %a 08:00>")`
-*** TODO work
-`(format-time-string "<%Y-%m-%d %a 09:00>--<%Y-%m-%d %a 18:00>")`
+`(format-time-string "<%Y-%m-%d %a 08:00>--<%Y-%m-%d %a 10:00>")`
 *** TODO $2
-`(format-time-string "<%Y-%m-%d %a 19:00>--<%Y-%m-%d %a 21:00>")`
+`(format-time-string "<%Y-%m-%d %a 10:00>--<%Y-%m-%d %a 12:00>")`
 *** TODO $3
+`(format-time-string "<%Y-%m-%d %a 14:00>--<%Y-%m-%d %a 18:00>")`
+*** TODO $4
+`(format-time-string "<%Y-%m-%d %a 19:00>--<%Y-%m-%d %a 21:00>")`
+*** TODO $5
 `(format-time-string "<%Y-%m-%d %a 21:00>--<%Y-%m-%d %a 23:00>")`
 $0
