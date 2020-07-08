@@ -10,10 +10,6 @@
 	    (python . t)
         (ein . t)))
 
-(defun my/conf-org-attr ()
-  (set-face-attribute 'org-table nil
-                      :family "Noto Sans Mono CJK SC"))
-
 ;; config `org-download'
 (require-package 'org-download)
 (with-eval-after-load 'org-download
@@ -227,18 +223,27 @@ PATH should be a topic that can be thrown at the man command."
 			   ;; 		  )
 			   )
   (defun org-ruby-replace ()
+    ""
     (interactive)
     (replace-regexp)
     ;TODO: \(.*\)(\(\)) -> [[ruby:\2][\1]]
     ))
 
+(defun my/conf-org-attr ()
+  ""
+  ;; (set-face-attribute 'org-table nil
+  ;;                     :family "Noto Sans Mono CJK SC")
+  )
+
 ;; table.el
 (add-hook 'org-src-mode-hook
-  	  #'(lambda ()
+          #'(lambda ()
               (when (and (eq major-mode 'text-mode))
- 		;; recognize table.el
-  		(face-remap-add-relative 'default
-  					             '(:family "Noto Sans Mono CJK SC")))))
+                ;; recognize table.el
+                (face-remap-add-relative 'default
+                                         '(:family "Noto Sans Mono CJK SC")))))
+;;; TODO: valgn package
+
 
 (defun my/conf-org ()
   (setq truncate-lines nil))
@@ -246,6 +251,9 @@ PATH should be a topic that can be thrown at the man command."
 (defun my/conf-org-drill ()
   (require-package 'org-drill)
   (require 'org-drill))
+
+(require 'valign)
+(add-hook 'org-mode-hook #'valign-mode)
 
 (add-hook 'org-mode-local-vars-hook
           #'(lambda ()
