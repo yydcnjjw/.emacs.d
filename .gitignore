@@ -17,6 +17,7 @@
 tramp
 lisp/conf-custom.el
 .last-package-update-day
+.dap-breakpoints
 .directory
 .projectile
 .lsp-session

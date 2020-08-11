@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: week-todo
+# key: week
+# --
+* TODO `(format-time-string "<%Y-%m-%d %a>")`--`(format-time-string "<%Y-%m-%d %a>")` [0%] :week:
+$0

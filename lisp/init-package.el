@@ -48,6 +48,8 @@
           (package-refresh-contents)
           (require-package package min-version t)))))
 
+(require-package 'use-package)
+(require 'use-package)
 
 (provide 'init-package)
 
