@@ -39,6 +39,7 @@
 (setq package-enable-at-startup nil)
 (package-initialize)
 
+;;;###autoload
 (defun require-package (package &optional min-version no-refresh)
   "PACKAGE MIN-VERSION NO-REFRESH."
   (or (package-installed-p package min-version)
