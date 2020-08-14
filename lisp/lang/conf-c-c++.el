@@ -1,5 +1,5 @@
 (setq-default c-basic-offset 4)
-
+(add-to-list 'auto-mode-alist '("\\.ipp\\'" . c++-mode))
 (setq tags-table-list (list (expand-file-name "~/resources/basic/tags/SYSTAGS")))
 
 (require-package 'ccls)
